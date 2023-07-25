@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".WeatherApplication"
-        android:theme="@style/Theme.JustWeather"
+        android:theme="@style/Theme.main_theme"
         tools:targetApi="31">
 
         <activity
