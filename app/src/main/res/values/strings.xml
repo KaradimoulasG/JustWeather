@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Just Weather</string>
+
+    <string name="bottom_nav_option_home">Home</string>
+    <string name="bottom_nav_option_search">Search</string>
+    <string name="bottom_nav_option_favourites">Favourites</string>
 </resources>
