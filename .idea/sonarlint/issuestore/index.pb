@@ -11,7 +11,5 @@ m
 `app/src/main/java/com/example/justweather/data/networkResultHandling/NetworkResultCallAdapter.kt,f\0\f0f30d077d588e2dc48410f5c0238d3ca514d7af
 ‰
 Yapp/src/main/java/com/example/justweather/data/networkResultHandling/NetworkResultCall.kt,5\5\5534c220565b342dfc4b0e9fd9c80e04b4ebb38f
-i
-9app/src/main/java/com/example/justweather/di/ApiModule.kt,1\7\172682d88eeb6e5779324cb4fa632ebe8413f1e8
 l
 <app/src/main/java/com/example/justweather/data/dto/SysDto.kt,8\d\8d7adf1c9827ec2bd72afbaccec53b6a36b9813d
