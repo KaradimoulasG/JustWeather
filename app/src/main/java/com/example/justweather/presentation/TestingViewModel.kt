@@ -6,6 +6,8 @@ import com.example.justweather.common.extensions.onError
 import com.example.justweather.common.extensions.onException
 import com.example.justweather.common.extensions.onSuccess
 import com.example.justweather.data.repositories.ICityRepo
+import com.example.justweather.domain.model.toForecast
+import com.example.justweather.domain.useCases.GetForecastUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,6 +15,7 @@ import kotlinx.coroutines.launch
 
 class TestingViewModel(
     private val cityRepo: ICityRepo,
+    private val useCase: GetForecastUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(TestingState())
@@ -54,7 +57,7 @@ class TestingViewModel(
 
     private fun getForecast(lat: Double, lon: Double) {
         viewModelScope.launch {
-            val response = cityRepo.getFiveDayForecast(lat, lon)
+            val response = useCase(lat, lon)
 
             response.onSuccess {
                 _state.update { state ->
@@ -62,6 +65,7 @@ class TestingViewModel(
                         eventName = TestingViewModelEvent.Success,
                     )
                 }
+                it.toForecast()
             }.onException {
                 _state.update {
                     it.copy(

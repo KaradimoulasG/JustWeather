@@ -1,15 +1,5 @@
 
-m
-=app/src/main/java/com/example/justweather/data/dto/MainDto.kt,4\4\4472327b3da76e6bb775d0dfe16d954783dd7968
-u
-Eapp/src/main/java/com/example/justweather/data/dto/CoordinationDto.kt,7\c\7cdd60e7df607d060b8d5592c04f1115520b3bf4
-o
-?app/src/main/java/com/example/justweather/data/dto/CloudsDto.kt,2\7\2707a41ccd594f17a28098ed8ced796df656cea6
-m
-=app/src/main/java/com/example/justweather/data/dto/WindDto.kt,7\3\736f96a745a6343091a08509fe7632e3b7ec229f
 ê
 `app/src/main/java/com/example/justweather/data/networkResultHandling/NetworkResultCallAdapter.kt,f\0\f0f30d077d588e2dc48410f5c0238d3ca514d7af
 â
 Yapp/src/main/java/com/example/justweather/data/networkResultHandling/NetworkResultCall.kt,5\5\5534c220565b342dfc4b0e9fd9c80e04b4ebb38f
-l
-<app/src/main/java/com/example/justweather/data/dto/SysDto.kt,8\d\8d7adf1c9827ec2bd72afbaccec53b6a36b9813d

@@ -26,7 +26,7 @@ suspend fun <T : Any> handleApi(
     }
 }
 
-private suspend fun <T : Any> handleError(
+suspend fun <T : Any> handleError(
     code: Int,
     execute: suspend () -> Response<T>,
 ) = when (code) {
