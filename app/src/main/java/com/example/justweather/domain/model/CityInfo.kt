@@ -1,12 +1,12 @@
 package com.example.justweather.domain.model
 
-import com.example.justweather.data.dto.CityInfoDto
-import com.example.justweather.data.dto.CloudsDto
-import com.example.justweather.data.dto.CoordinationDto
-import com.example.justweather.data.dto.MainDto
-import com.example.justweather.data.dto.SysDto
-import com.example.justweather.data.dto.WeatherDto
-import com.example.justweather.data.dto.WindDto
+import com.example.justweather.data.dto.cityInfo.CityInfoDto
+import com.example.justweather.data.dto.cityInfo.CloudsDto
+import com.example.justweather.data.dto.cityInfo.CoordinationDto
+import com.example.justweather.data.dto.cityInfo.MainDto
+import com.example.justweather.data.dto.cityInfo.SysDto
+import com.example.justweather.data.dto.cityInfo.WeatherDto
+import com.example.justweather.data.dto.cityInfo.WindDto
 
 data class CityInfo(
     val base: String,

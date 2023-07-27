@@ -1,4 +1,4 @@
-package com.example.justweather.data.dto
+package com.example.justweather.data.dto.cityInfo
 
 import com.squareup.moshi.Json
 
@@ -14,5 +14,5 @@ data class CityInfoDto(
     @field:Json(name = "sys") val sys: SysDto,
     @field:Json(name = "visibility") val visibility: Int,
     @field:Json(name = "weather") val weather: List<WeatherDto>,
-    @field:Json(name = "wind") val windDto: WindDto
+    @field:Json(name = "wind") val windDto: WindDto,
 )

@@ -26,9 +26,39 @@ class TestingViewModel(
         viewModelScope.launch {
             val response = cityRepo.getCityInfo()
 
-            response.onSuccess {
+            response.onSuccess { response ->
+                _state.update { state ->
+                    state.copy(
+                        eventName = TestingViewModelEvent.Success,
+                    )
+                }
+                getForecast(
+                    response.coord.lat,
+                    response.coord.lon,
+                )
+            }.onException {
                 _state.update {
                     it.copy(
+                        eventName = TestingViewModelEvent.Fail,
+                    )
+                }
+            }.onError { _, _ ->
+                _state.update {
+                    it.copy(
+                        eventName = TestingViewModelEvent.Loading,
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getForecast(lat: Double, lon: Double) {
+        viewModelScope.launch {
+            val response = cityRepo.getFiveDayForecast(lat, lon)
+
+            response.onSuccess {
+                _state.update { state ->
+                    state.copy(
                         eventName = TestingViewModelEvent.Success,
                     )
                 }

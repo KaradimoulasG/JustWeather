@@ -1,4 +1,4 @@
-package com.example.justweather.data.dto
+package com.example.justweather.data.dto.cityInfo
 
 import com.squareup.moshi.Json
 
