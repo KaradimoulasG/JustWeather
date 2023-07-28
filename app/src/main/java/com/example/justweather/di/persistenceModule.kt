@@ -5,7 +5,7 @@ import com.example.justweather.data.persistence.AppDatabase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
-val persistenceModule = module {
+val persistenceModule = module(createdAtStart = true) {
 
     single {
         Room.databaseBuilder(
