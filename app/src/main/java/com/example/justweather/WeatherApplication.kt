@@ -2,6 +2,7 @@ package com.example.justweather
 
 import android.app.Application
 import com.example.justweather.di.ApiModule
+import com.example.justweather.di.persistenceModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +18,10 @@ class WeatherApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@WeatherApplication)
-            modules(ApiModule)
+            modules(
+                ApiModule,
+                persistenceModule,
+            )
         }
     }
 }

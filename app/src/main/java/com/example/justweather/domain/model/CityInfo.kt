@@ -1,5 +1,6 @@
 package com.example.justweather.domain.model
 
+import androidx.room.Entity
 import com.example.justweather.data.dto.cityInfo.CityInfoDto
 import com.example.justweather.data.dto.cityInfo.CloudsDto
 import com.example.justweather.data.dto.cityInfo.CoordinationDto
@@ -8,6 +9,7 @@ import com.example.justweather.data.dto.cityInfo.SysDto
 import com.example.justweather.data.dto.cityInfo.WeatherDto
 import com.example.justweather.data.dto.cityInfo.WindDto
 
+@Entity
 data class CityInfo(
     val base: String,
     val clouds: CloudsDto,

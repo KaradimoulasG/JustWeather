@@ -83,4 +83,11 @@ dependencies {
 
     //Material 3
     implementation "com.google.android.material:material:1.11.0-alpha01"
+
+    //Room
+    implementation "androidx.room:room-runtime:2.5.2"
+    annotationProcessor "androidx.room:room-compiler:2.5.2"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:2.5.2"
 }

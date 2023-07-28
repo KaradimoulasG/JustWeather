@@ -5,7 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.justweather.common.extensions.onError
 import com.example.justweather.common.extensions.onException
 import com.example.justweather.common.extensions.onSuccess
+import com.example.justweather.data.persistence.CityDao
 import com.example.justweather.data.repositories.ICityRepo
+import com.example.justweather.domain.model.toCityInfo
 import com.example.justweather.domain.model.toForecast
 import com.example.justweather.domain.useCases.GetForecastUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,6 +37,7 @@ class TestingViewModel(
                         eventName = TestingViewModelEvent.Success,
                     )
                 }
+//                cityDao.insertFavouriteCity(response.name)
                 getForecast(
                     response.coord.lat,
                     response.coord.lon,
