@@ -37,7 +37,6 @@ class TestingViewModel(
                         eventName = TestingViewModelEvent.Success,
                     )
                 }
-//                cityDao.insertFavouriteCity(response.name)
                 getForecast(
                     response.coord.lat,
                     response.coord.lon,

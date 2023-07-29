@@ -1,20 +1,13 @@
 package com.example.justweather.di
 
-import androidx.room.Room
 import com.example.justweather.data.persistence.AppDatabase
-import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val persistenceModule = module(createdAtStart = true) {
+val persistenceModule = module {
 
-    single {
-        Room.databaseBuilder(
-            androidApplication(),
-            AppDatabase::class.java,
-            "appDatabase",
-        )
-            .fallbackToDestructiveMigration()
-            .build()
+    single<AppDatabase> {
+        AppDatabase.newInstance(androidContext())
     }
 
     single { get<AppDatabase>().cityDao() }

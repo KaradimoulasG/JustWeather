@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val ApiModule = module(createdAtStart = true) {
+val ApiModule = module {
 
     single {
         val loggingInterceptor = HttpLoggingInterceptor()

@@ -19,8 +19,8 @@ class WeatherApplication : Application() {
             androidLogger()
             androidContext(this@WeatherApplication)
             modules(
-                ApiModule,
                 persistenceModule,
+                ApiModule,
             )
         }
     }

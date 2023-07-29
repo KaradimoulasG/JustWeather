@@ -1,6 +1,7 @@
-package com.example.justweather.domain.model
+package com.example.justweather.data.persistence
 
-import com.example.justweather.data.dto.cityInfo.CityInfoDto
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.justweather.data.dto.cityInfo.CloudsDto
 import com.example.justweather.data.dto.cityInfo.CoordinationDto
 import com.example.justweather.data.dto.cityInfo.MainDto
@@ -8,7 +9,10 @@ import com.example.justweather.data.dto.cityInfo.SysDto
 import com.example.justweather.data.dto.cityInfo.WeatherDto
 import com.example.justweather.data.dto.cityInfo.WindDto
 
-data class CityInfo(
+@Entity
+data class CityInfoEntity(
+    @PrimaryKey(autoGenerate = false)
+    val name: String,
     val base: String,
     val clouds: CloudsDto,
     val code: Int,
@@ -16,25 +20,8 @@ data class CityInfo(
     val timestamp: Int,
     val id: Int,
     val main: MainDto,
-    val cityName: String,
     val system: SysDto,
     val visibility: Int,
     val weather: List<WeatherDto>,
     val wind: WindDto,
 )
-
-fun CityInfoDto.toCityInfo() =
-    CityInfo(
-        base = base,
-        clouds = cloudsDto,
-        code = cod,
-        coordination = coord,
-        timestamp = dt,
-        id = id,
-        main = main,
-        cityName = name,
-        system = sys,
-        visibility = visibility,
-        weather = weather,
-        wind = windDto,
-    )
