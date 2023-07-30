@@ -5,9 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.justweather.common.extensions.onError
 import com.example.justweather.common.extensions.onException
 import com.example.justweather.common.extensions.onSuccess
-import com.example.justweather.data.persistence.CityDao
 import com.example.justweather.data.repositories.ICityRepo
-import com.example.justweather.domain.model.toCityInfo
 import com.example.justweather.domain.model.toForecast
 import com.example.justweather.domain.useCases.GetForecastUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,10 +35,8 @@ class TestingViewModel(
                         eventName = TestingViewModelEvent.Success,
                     )
                 }
-                getForecast(
-                    response.coord.lat,
-                    response.coord.lon,
-                )
+                getForecast(response.coord.lat, response.coord.lon)
+                getPollution(response.coord.lat, response.coord.lon)
             }.onException {
                 _state.update {
                     it.copy(
@@ -78,6 +74,21 @@ class TestingViewModel(
                 _state.update {
                     it.copy(
                         eventName = TestingViewModelEvent.Loading,
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getPollution(lat: Double, lon: Double) {
+        viewModelScope.launch {
+            val response = cityRepo.getAirPollution(lat, lon)
+
+            response.onSuccess {
+                timber.log.Timber.i("PAOK worked")
+                _state.update { state ->
+                    state.copy(
+                        eventName = TestingViewModelEvent.Success,
                     )
                 }
             }
