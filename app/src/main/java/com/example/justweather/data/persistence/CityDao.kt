@@ -1,17 +1,18 @@
 package com.example.justweather.data.persistence
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Upsert
+import com.example.justweather.domain.model.CityInfo
 
 @Dao
 interface CityDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavouriteCity(entity: CityInfoEntity)
+    @Upsert
+    suspend fun insertFavouriteCity(entity: CityInfo)
 
-//    @Query("SELECT * FROM CityInfoEntity WHERE cityName= :name")
-//    suspend fun getFavouriteCity(name: String): CityInfo
+    @Query("SELECT * FROM CityInfo")
+    suspend fun getFavouriteCity(): CityInfo
 //
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertSavedCities(cities: List<CityInfo>)

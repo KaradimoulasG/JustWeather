@@ -9,3 +9,11 @@ Uapp/src/main/java/com/example/justweather/data/networkResultHandling/NetworkRes
 Oapp/src/main/java/com/example/justweather/domain/useCases/GetForecastUseCase.kt,c\5\c51da2e7c3fc5ee78e278b8914071e8b67cebbdf
 z
 Japp/src/main/java/com/example/justweather/data/dto/cityInfo/CityInfoDto.kt,9\c\9c485369a7dee19db3cbae1a77dcc507b5fccf1e
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+|
+Lapp/src/main/java/com/example/justweather/data/persistence/CityInfoEntity.kt,f\1\f10ef93ec76b9386c4c864d323267d06c3073879
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+z
+Japp/src/main/java/com/example/justweather/presentation/TestingViewModel.kt,c\d\cd90c702ab577b28bac42e3f2e7c187a7aa46dae
