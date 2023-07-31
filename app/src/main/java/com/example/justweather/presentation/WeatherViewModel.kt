@@ -13,17 +13,38 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class TestingViewModel(
+class WeatherViewModel(
     private val cityRepo: ICityRepo,
     private val useCase: GetForecastUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(TestingState())
+    private val _state = MutableStateFlow(WeatherState())
     val state = _state.asStateFlow()
 
     init {
-        _state.value = TestingState()
+        _state.value = WeatherState()
     }
+
+//    fun populateScreenWithFavouriteCity() {
+//        viewModelScope.launch {
+//            val response = cityRepo.getFavouriteCity()
+//
+//            timber.log.Timber.i("the response is $response")
+//
+//            when (response?.cityName?.isEmpty()) {
+//                true -> {
+//                    _state.update { state ->
+//                        state.copy(eventName = WeatherViewModelEvent.EmptyFavouriteCity)
+//                    }
+//                }
+//                else -> {
+//                    _state.update { state ->
+//                        state.copy(eventName = WeatherViewModelEvent.SavedFavouriteCity)
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     fun testingCase() {
         viewModelScope.launch {
@@ -32,7 +53,7 @@ class TestingViewModel(
             response.onSuccess { response ->
                 _state.update { state ->
                     state.copy(
-                        eventName = TestingViewModelEvent.Success,
+                        eventName = WeatherViewModelEvent.Success,
                     )
                 }
                 getForecast(response.coord.lat, response.coord.lon)
@@ -40,13 +61,13 @@ class TestingViewModel(
             }.onException {
                 _state.update {
                     it.copy(
-                        eventName = TestingViewModelEvent.Fail,
+                        eventName = WeatherViewModelEvent.Fail,
                     )
                 }
             }.onError { _, _ ->
                 _state.update {
                     it.copy(
-                        eventName = TestingViewModelEvent.Loading,
+                        eventName = WeatherViewModelEvent.Loading,
                     )
                 }
             }
@@ -60,20 +81,20 @@ class TestingViewModel(
             response.onSuccess {
                 _state.update { state ->
                     state.copy(
-                        eventName = TestingViewModelEvent.Success,
+                        eventName = WeatherViewModelEvent.Success,
                     )
                 }
                 it.toForecast()
             }.onException {
                 _state.update {
                     it.copy(
-                        eventName = TestingViewModelEvent.Fail,
+                        eventName = WeatherViewModelEvent.Fail,
                     )
                 }
             }.onError { _, _ ->
                 _state.update {
                     it.copy(
-                        eventName = TestingViewModelEvent.Loading,
+                        eventName = WeatherViewModelEvent.Loading,
                     )
                 }
             }
@@ -85,10 +106,9 @@ class TestingViewModel(
             val response = cityRepo.getAirPollution(lat, lon)
 
             response.onSuccess {
-                timber.log.Timber.i("PAOK worked")
                 _state.update { state ->
                     state.copy(
-                        eventName = TestingViewModelEvent.Success,
+                        eventName = WeatherViewModelEvent.Success,
                     )
                 }
             }
@@ -96,15 +116,17 @@ class TestingViewModel(
     }
 }
 
-data class TestingState(
-    val eventName: TestingViewModelEvent = TestingViewModelEvent.None,
+data class WeatherState(
+    val eventName: WeatherViewModelEvent = WeatherViewModelEvent.None,
     val message: String = "",
 )
 
-sealed class TestingViewModelEvent() {
-    object None : TestingViewModelEvent()
-    object Loading : TestingViewModelEvent()
-    object Success : TestingViewModelEvent()
-    object Fail : TestingViewModelEvent()
-    object Exception : TestingViewModelEvent()
+sealed class WeatherViewModelEvent() {
+    object None : WeatherViewModelEvent()
+    object Loading : WeatherViewModelEvent()
+    object Success : WeatherViewModelEvent()
+    object Fail : WeatherViewModelEvent()
+    object Exception : WeatherViewModelEvent()
+    object EmptyFavouriteCity : WeatherViewModelEvent()
+    object SavedFavouriteCity : WeatherViewModelEvent()
 }

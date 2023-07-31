@@ -21,15 +21,15 @@ class CityRepoImpl(
     override suspend fun getAirPollution(latitude: Double, longitude: Double) =
         api.getAirPollution(latitude, longitude)
 
-    override suspend fun saveFavouriteCity(city: CityInfo) {
-        cityDao.insertFavouriteCity(city)
-    }
-
-    override suspend fun getFavouriteCity(): CityInfo? {
-        val cityName = cityDao.getFavouriteCity().cityName
-        return when (cityName.isEmpty()) {
-            true -> null
-            false -> cityDao.getFavouriteCity()
-        }
-    }
+//    override suspend fun saveFavouriteCity(city: CityInfo) {
+//        cityDao.insertFavouriteCity(city)
+//    }
+//
+//    override suspend fun getFavouriteCity(): CityInfo? {
+//        val cityName = cityDao.getFavouriteCity().cityName
+//        return when (cityName.isEmpty()) {
+//            true -> null
+//            false -> cityDao.getFavouriteCity()
+//        }
+//    }
 }

@@ -16,7 +16,7 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: TestingViewModel by viewModel()
+    private val viewModel: WeatherViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,11 +34,11 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {
-                    TestingViewModelEvent.None -> Timber.i("PAOK here")
-                    TestingViewModelEvent.Success -> Timber.i("PAOK worked")
-                    TestingViewModelEvent.Fail -> Timber.i("PAOK failed")
-                    TestingViewModelEvent.Loading -> Timber.i("PAOK error")
-                    else -> Timber.i("PAOK sonar won't let me keep this empty")
+                    WeatherViewModelEvent.None -> Timber.i("here")
+                    WeatherViewModelEvent.Success -> Timber.i("worked")
+                    WeatherViewModelEvent.Fail -> Timber.i("failed")
+                    WeatherViewModelEvent.Loading -> Timber.i("error")
+                    else -> Timber.i("sonar won't let me keep this empty")
                 }
             }.launchIn(this)
         }
