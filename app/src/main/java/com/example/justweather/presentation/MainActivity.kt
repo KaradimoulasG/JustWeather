@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        binding.bottomNavigationView.apply {
+            background = null
+            menu.getItem(3).isEnabled = false
+        }
+
         viewModel.testingCase()
     }
 
