@@ -2,5 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_gray">#E5E5EA</color>
     <color name="card_color">#222A36</color>
+    <color name="transparent">#00000000</color>
+    <color name="ocean">#6672FA</color>
 </resources>

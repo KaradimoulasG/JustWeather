@@ -30,7 +30,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
     private fun setUpViewModel() {
 //        viewModel.populateScreenWithFavouriteCity()
 
-        Timber.i("PAOK test")
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {

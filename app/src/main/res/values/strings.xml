@@ -4,6 +4,9 @@
     <string name="bottom_nav_option_home">Home</string>
     <string name="bottom_nav_option_search">Search</string>
     <string name="bottom_nav_option_favourites">Favourites</string>
+    <string name="search">Search</string>
+    <string name="cancel">Cancel</string>
+    <string name="search_hint_city_name">Enter city\'s name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
