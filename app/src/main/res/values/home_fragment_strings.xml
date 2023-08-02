@@ -3,8 +3,8 @@
 
     <string name="city_name_title">%s</string>
     <string name="date_time_title">%s</string>
-    <string name="local_temp">%d °C</string>
-    <string name="real_feel">Real feel : %.2f °C</string>
+    <string name="local_temp">%d°C</string>
+    <string name="real_feel">Real feel : %.1f°C</string>
 
 <!--  Three piece component strings  -->
 

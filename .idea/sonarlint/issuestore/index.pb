@@ -3,10 +3,6 @@
 `app/src/main/java/com/example/justweather/data/networkResultHandling/NetworkResultCallAdapter.kt,f\0\f0f30d077d588e2dc48410f5c0238d3ca514d7af
 ‰
 Yapp/src/main/java/com/example/justweather/data/networkResultHandling/NetworkResultCall.kt,5\5\5534c220565b342dfc4b0e9fd9c80e04b4ebb38f
-…
-Uapp/src/main/java/com/example/justweather/data/networkResultHandling/NetworkResult.kt,0\d\0d1c287b6a0d7a7a66df2b2d19be2ec559192202
-
-Oapp/src/main/java/com/example/justweather/domain/useCases/GetForecastUseCase.kt,c\5\c51da2e7c3fc5ee78e278b8914071e8b67cebbdf
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 |
@@ -42,13 +38,9 @@ G.idea/sonarlint/issuestore/b/4/b4a0b63ce8560bbc5de0f9995c20cc861dc2adb3,b\0\b0
 w
 G.idea/sonarlint/issuestore/2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4,5\1\516e730a14e71f02fa73f3acd6dc7cea9a9fe002
 w
-G.idea/sonarlint/issuestore/e/b/eb217032a6af4f19883a3c8407885505bbed3443,0\6\06b67eb81e015bd96dcd0d66105237f05b9fb401
-w
 G.idea/sonarlint/issuestore/9/c/9cb1102b5ed1dffb577a0def3643794404a9e9df,5\6\5668aec7b196159022711a80b990893843185678
 w
 G.idea/sonarlint/issuestore/f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e,5\2\52114fdaa426e9b83a3c5df4e11c4f0ebbcd814b
-w
-G.idea/sonarlint/issuestore/9/8/98ca6b123d7fe8444d3f9e2a84222060fcaed350,5\5\557374e61d9d47e36f8ff13252cd240934d45b2f
 w
 G.idea/sonarlint/issuestore/1/7/172682d88eeb6e5779324cb4fa632ebe8413f1e8,6\6\66256e65fe82e19f049bce9fc096701cee332417
 w
@@ -62,8 +54,6 @@ j
 w
 G.idea/sonarlint/issuestore/6/6/66256e65fe82e19f049bce9fc096701cee332417,d\e\de1da3f33ad0d3a234edec13a438c4e5aa7d0b60
 w
-G.idea/sonarlint/issuestore/5/5/557374e61d9d47e36f8ff13252cd240934d45b2f,7\3\73d92ffa87a79c8305f7a8bbb64a22dd25361533
-w
 G.idea/sonarlint/issuestore/5/a/5aba05cd90f9e1905005696a73483ce7dbade61b,1\d\1da0c0ce5ee2ede2bc8c23aa4c22a62ab4a02526
 w
 G.idea/sonarlint/issuestore/b/0/b04578cffb47b1e57970601a0cacef6081245859,7\2\72d60672c1f4ee9fd0ef10acd6189a6dce5f9e9f
@@ -73,8 +63,6 @@ w
 G.idea/sonarlint/issuestore/b/8/b86279fa0f08a48815766b267d844d29fcd222d5,f\8\f86b40dee983d2dfc084335251baec50210ce2e0
 w
 G.idea/sonarlint/issuestore/5/0/50736aac10764b60e34da384d06d4558e1b94e3c,7\3\735d597da712ef676349f2813811644838d304c7
-w
-G.idea/sonarlint/issuestore/0/6/06b67eb81e015bd96dcd0d66105237f05b9fb401,8\e\8ee14674151c375f73cf6c51354d47451f5ddaa1
 w
 G.idea/sonarlint/issuestore/5/2/52114fdaa426e9b83a3c5df4e11c4f0ebbcd814b,6\c\6c2193e090c53ebe039a28ee0f93415902762a26
 w
@@ -87,8 +75,6 @@ w
 G.idea/sonarlint/issuestore/d/b/dbb1e70de2bf3059066c2a80c00ef953de209fa4,5\e\5e46e6f78416ee7d5a58b7b7263795a81418a870
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-|
-Lapp/src/main/java/com/example/justweather/common/extensions/ApiExtensions.kt,a\d\ad03111b77acd7b78abd5bc12a9d3abd26bff54d
 w
 G.idea/sonarlint/issuestore/1/d/1da0c0ce5ee2ede2bc8c23aa4c22a62ab4a02526,d\8\d8053b3119d707e74d32189f9b7a5ba2193339b7
 w
@@ -102,10 +88,6 @@ G.idea/sonarlint/issuestore/a/2/a23440fc1b6f43124479b3f656018bd2464c9cd7,9\3\93
 w
 G.idea/sonarlint/issuestore/f/8/f86b40dee983d2dfc084335251baec50210ce2e0,7\e\7e4b8b834b8d1570742b9e08ac7c3fac45b8c7a8
 w
-G.idea/sonarlint/issuestore/7/3/73d92ffa87a79c8305f7a8bbb64a22dd25361533,1\f\1f945e10fb6a8d1e991dc3c11264a8b20920d0c8
-w
-G.idea/sonarlint/issuestore/8/e/8ee14674151c375f73cf6c51354d47451f5ddaa1,5\4\544feffd0c9c6efa5b651e1e0bfefc4119e2c930
-w
 G.idea/sonarlint/issuestore/d/e/de1da3f33ad0d3a234edec13a438c4e5aa7d0b60,f\1\f1e001200ed7a22dcf459cb89569cddf7075cd24
 w
 G.idea/sonarlint/issuestore/9/9/99437a72e53e3372cda2bff4e9e442b296b81b2e,2\3\23d47b6ab081defac271d7758d18dfc06af79241
@@ -115,3 +97,7 @@ w
 G.idea/sonarlint/issuestore/6/c/6c2193e090c53ebe039a28ee0f93415902762a26,b\a\bae589266abfdde752f1528d649b33b0155cf6da
 w
 G.idea/sonarlint/issuestore/4/8/4826af74552b25fe9e156c671f607b28ba2cf365,7\e\7e4e9486ab7e5ef3c5edd9612788ba2c46fb7691
+ˆ
+Xapp/src/main/java/com/example/justweather/common/components/ThreePieceDetailComponent.kt,c\d\cd0f93032a71d20cf91ac45425727c1e3a9b2f22
+z
+Japp/src/main/java/com/example/justweather/data/dto/cityInfo/CityInfoDto.kt,9\c\9c485369a7dee19db3cbae1a77dcc507b5fccf1e

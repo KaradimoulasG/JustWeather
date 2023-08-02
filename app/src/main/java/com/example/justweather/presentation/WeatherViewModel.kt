@@ -6,8 +6,10 @@ import com.example.justweather.common.extensions.onError
 import com.example.justweather.common.extensions.onException
 import com.example.justweather.common.extensions.onSuccess
 import com.example.justweather.data.repositories.ICityRepo
+import com.example.justweather.domain.model.ForecastInfo
 import com.example.justweather.domain.model.toCityInfo
 import com.example.justweather.domain.model.toForecast
+import com.example.justweather.domain.model.toForecastInfo
 import com.example.justweather.domain.useCases.GetForecastUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,34 +28,12 @@ class WeatherViewModel(
         _state.value = WeatherState()
     }
 
-//    fun populateScreenWithFavouriteCity() {
-//        viewModelScope.launch {
-//            val response = cityRepo.getFavouriteCity()
-//
-//            timber.log.Timber.i("the response is $response")
-//
-//            when (response?.cityName?.isEmpty()) {
-//                true -> {
-//                    _state.update { state ->
-//                        state.copy(eventName = WeatherViewModelEvent.EmptyFavouriteCity)
-//                    }
-//                }
-//                else -> {
-//                    _state.update { state ->
-//                        state.copy(eventName = WeatherViewModelEvent.SavedFavouriteCity)
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-    fun testingCase() {
+    fun getCityInfo(city: String) {
         viewModelScope.launch {
             _state.update { state ->
                 state.copy(eventName = WeatherViewModelEvent.Loading)
             }
 
-            val city = "Thessaloniki"
             val response = cityRepo.getCityInfo(city)
 
             response.onSuccess { apiResponse ->
@@ -63,12 +43,12 @@ class WeatherViewModel(
                         eventName = WeatherViewModelEvent.GotCity,
                         cityName = city,
                         dateTime = model.timestamp,
-                        currentTemp = model.main.temp,
-                        realFeel = model.main.feels_like,
-                        weatherIcon = model.weather[0].icon,
-                        windSpeed = model.wind.speed,
-                        pressure = model.main.pressure,
-                        humidity = model.main.humidity,
+                        currentTemp = model.mainDetails.temp,
+                        realFeel = model.mainDetails.feels_like,
+                        weatherIcon = model.weatherDetails[0].icon,
+                        windSpeed = model.windDetails.speed,
+                        pressure = model.mainDetails.pressure,
+                        humidity = model.mainDetails.humidity,
                     )
                 }
                 getForecast(model.coordination.lat, model.coordination.lon)
@@ -94,12 +74,14 @@ class WeatherViewModel(
             val response = useCase(lat, lon)
 
             response.onSuccess {
+                val result = it.toForecast()
+                val forecastList = result.list.toForecastInfo()
                 _state.update { state ->
                     state.copy(
                         eventName = WeatherViewModelEvent.GotForecast,
+                        forecastList = forecastList,
                     )
                 }
-                it.toForecast()
             }.onException {
                 _state.update {
                     it.copy(
@@ -141,18 +123,19 @@ data class WeatherState(
     val windSpeed: Double? = 0.0,
     val humidity: Int? = 0,
     val pressure: Int? = 0,
+    val forecastList: List<ForecastInfo> = listOf(),
     val message: String = "",
 )
 
 sealed class WeatherViewModelEvent() {
-    object None : WeatherViewModelEvent()
-    object Loading : WeatherViewModelEvent()
-    object Success : WeatherViewModelEvent()
-    object Fail : WeatherViewModelEvent()
-    object Exception : WeatherViewModelEvent()
-    object EmptyFavouriteCity : WeatherViewModelEvent()
-    object SavedFavouriteCity : WeatherViewModelEvent()
-    object GotCity : WeatherViewModelEvent()
-    object GotForecast : WeatherViewModelEvent()
-    object GotPollution : WeatherViewModelEvent()
+    data object None : WeatherViewModelEvent()
+    data object Loading : WeatherViewModelEvent()
+    data object Success : WeatherViewModelEvent()
+    data object Fail : WeatherViewModelEvent()
+    data object Exception : WeatherViewModelEvent()
+    data object EmptyFavouriteCity : WeatherViewModelEvent()
+    data object SavedFavouriteCity : WeatherViewModelEvent()
+    data object GotCity : WeatherViewModelEvent()
+    data object GotForecast : WeatherViewModelEvent()
+    data object GotPollution : WeatherViewModelEvent()
 }

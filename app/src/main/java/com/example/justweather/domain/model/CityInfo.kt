@@ -18,13 +18,13 @@ data class CityInfo(
     val coordination: CoordinationDto,
     val timestamp: Int,
     val id: Int,
-    val main: MainDto,
+    val mainDetails: MainDto,
     @PrimaryKey(autoGenerate = false)
     val cityName: String,
     val system: SysDto,
     val visibility: Int,
-    val weather: List<WeatherDto>,
-    val wind: WindDto,
+    val weatherDetails: List<WeatherDto>,
+    val windDetails: WindDto,
 )
 
 fun CityInfoDto.toCityInfo() =
@@ -35,10 +35,10 @@ fun CityInfoDto.toCityInfo() =
         coordination = coord,
         timestamp = dt,
         id = id,
-        main = main,
+        mainDetails = main,
         cityName = name,
         system = sys,
         visibility = visibility,
-        weather = weather,
-        wind = wind,
+        weatherDetails = weather,
+        windDetails = wind,
     )

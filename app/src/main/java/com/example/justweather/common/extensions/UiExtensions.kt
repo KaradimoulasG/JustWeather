@@ -21,6 +21,12 @@ fun Int.transformToDate(): String {
     return simpleDate.format(Date())
 }
 
+@SuppressLint("SimpleDateFormat")
+fun Int.transformToDateIndented(): String {
+    val simpleDate = SimpleDateFormat("E\n, dd/M/yyyy\n hh:mm")
+    return simpleDate.format(Date())
+}
+
 fun String.showWeatherIcon() =
     when (this) {
         WeatherDescription.ClearSkyDay.iconId -> R.drawable.ic_clear_sky_day

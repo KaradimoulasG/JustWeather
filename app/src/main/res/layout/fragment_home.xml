@@ -19,7 +19,7 @@
                 android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/rounded_layout"
                 android:elevation="6dp"
                 android:orientation="vertical"
@@ -31,6 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
                     android:textColor="@color/white"
                     android:textSize="32sp"
                     android:textStyle="bold"
@@ -69,7 +70,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_gravity="end"
                         android:layout_marginTop="24dp"
-                        android:layout_marginBottom="60dp"
+                        android:layout_marginBottom="36dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -112,15 +113,13 @@
                 android:elevation="8dp"
                 android:clipToOutline="false" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/forecast_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp" />
         </LinearLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/hello_blank_fragment" />-->
-
 </RelativeLayout>

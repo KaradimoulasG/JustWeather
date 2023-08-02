@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.justweather.R
@@ -27,22 +28,27 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         get() = FragmentHomeBinding::inflate
 
     private val viewModel: WeatherViewModel by sharedViewModel()
+    private val forecastAdapter = ForecastAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViewModel()
+        binding.forecastRv.apply {
+            layoutManager = LinearLayoutManager(activity?.applicationContext)
+            adapter = forecastAdapter
+        }
         populateMainViews(viewModel.state.value)
     }
 
     private fun setUpViewModel() {
-//        viewModel.populateScreenWithFavouriteCity()
-        viewModel.testingCase()
+        viewModel.getCityInfo(city = "Thessaloniki")
 
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {
                     WeatherViewModelEvent.Loading -> Timber.i("PAOK we wait")
                     WeatherViewModelEvent.GotCity -> populateMainViews(viewModel.state.value)
+                    WeatherViewModelEvent.GotForecast -> populateForecastView(viewModel.state.value)
                     WeatherViewModelEvent.EmptyFavouriteCity -> Timber.i("did not work")
                     else -> {}
                 }
@@ -67,5 +73,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 stateValue.pressure!!,
             )
         }
+    }
+
+    private fun populateForecastView(value: WeatherState) {
+        forecastAdapter.addAll(value.forecastList)
     }
 }
