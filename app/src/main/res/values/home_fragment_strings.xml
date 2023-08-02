@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="city_name_title">%s</string>
+    <string name="date_time_title">%s</string>
+    <string name="local_temp">%d °C</string>
+    <string name="real_feel">Real feel : %.2f °C</string>
+
+<!--  Three piece component strings  -->
+
+    <string name="wind_speed_title">Wind</string>
+    <string name="wind_speed_details">%d km/h</string>
+    <string name="humidity_title">Humidity</string>
+    <string name="humidity_details">%d</string>
+    <string name="pressure_title">Pressure</string>
+    <string name="pressure_details">%d MB</string>
+</resources>

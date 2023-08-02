@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             background = null
             menu.getItem(3).isEnabled = false
         }
-        viewModel.testingCase()
     }
 
     private fun setUpViewModel() {

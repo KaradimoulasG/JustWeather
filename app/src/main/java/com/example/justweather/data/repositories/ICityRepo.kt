@@ -8,7 +8,7 @@ import com.example.justweather.domain.model.CityInfo
 
 interface ICityRepo {
 
-    suspend fun getCityInfo(): NetworkResult<CityInfoDto>
+    suspend fun getCityInfo(cityName: String): NetworkResult<CityInfoDto>
     suspend fun getFiveDayForecast(latitude: Double, longitude: Double): NetworkResult<ForecastDto>
     suspend fun getAirPollution(latitude: Double, longitude: Double): NetworkResult<AirPollutionDto>
 

@@ -10,8 +10,10 @@ import retrofit2.http.Query
 
 interface OpenWeatherApi {
 
-    @GET("/data/2.5/weather?q=Athens&appid=${Constants.API_KEY}&units=metric")
-    suspend fun getCityInfo(): NetworkResult<CityInfoDto>
+    @GET("/data/2.5/weather?appid=${Constants.API_KEY}&units=metric")
+    suspend fun getCityInfo(
+        @Query("q") cityName: String,
+    ): NetworkResult<CityInfoDto>
 
     @GET("/data/2.5/forecast?&appid=${Constants.API_KEY}&units=metric")
     suspend fun getFiveDayForecast(

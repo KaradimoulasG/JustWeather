@@ -6,6 +6,7 @@ import com.example.justweather.common.extensions.onError
 import com.example.justweather.common.extensions.onException
 import com.example.justweather.common.extensions.onSuccess
 import com.example.justweather.data.repositories.ICityRepo
+import com.example.justweather.domain.model.toCityInfo
 import com.example.justweather.domain.model.toForecast
 import com.example.justweather.domain.useCases.GetForecastUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -48,16 +49,30 @@ class WeatherViewModel(
 
     fun testingCase() {
         viewModelScope.launch {
-            val response = cityRepo.getCityInfo()
+            _state.update { state ->
+                state.copy(eventName = WeatherViewModelEvent.Loading)
+            }
 
-            response.onSuccess { response ->
+            val city = "Thessaloniki"
+            val response = cityRepo.getCityInfo(city)
+
+            response.onSuccess { apiResponse ->
+                val model = apiResponse.toCityInfo()
                 _state.update { state ->
                     state.copy(
-                        eventName = WeatherViewModelEvent.Success,
+                        eventName = WeatherViewModelEvent.GotCity,
+                        cityName = city,
+                        dateTime = model.timestamp,
+                        currentTemp = model.main.temp,
+                        realFeel = model.main.feels_like,
+                        weatherIcon = model.weather[0].icon,
+                        windSpeed = model.wind.speed,
+                        pressure = model.main.pressure,
+                        humidity = model.main.humidity,
                     )
                 }
-                getForecast(response.coord.lat, response.coord.lon)
-                getPollution(response.coord.lat, response.coord.lon)
+                getForecast(model.coordination.lat, model.coordination.lon)
+                getPollution(model.coordination.lat, model.coordination.lon)
             }.onException {
                 _state.update {
                     it.copy(
@@ -81,7 +96,7 @@ class WeatherViewModel(
             response.onSuccess {
                 _state.update { state ->
                     state.copy(
-                        eventName = WeatherViewModelEvent.Success,
+                        eventName = WeatherViewModelEvent.GotForecast,
                     )
                 }
                 it.toForecast()
@@ -108,7 +123,7 @@ class WeatherViewModel(
             response.onSuccess {
                 _state.update { state ->
                     state.copy(
-                        eventName = WeatherViewModelEvent.Success,
+                        eventName = WeatherViewModelEvent.GotPollution,
                     )
                 }
             }
@@ -118,6 +133,14 @@ class WeatherViewModel(
 
 data class WeatherState(
     val eventName: WeatherViewModelEvent = WeatherViewModelEvent.None,
+    val cityName: String = "",
+    val dateTime: Int? = null,
+    val currentTemp: Double = 0.0,
+    val realFeel: Double = 0.0,
+    val weatherIcon: String = "",
+    val windSpeed: Double? = 0.0,
+    val humidity: Int? = 0,
+    val pressure: Int? = 0,
     val message: String = "",
 )
 
@@ -129,4 +152,7 @@ sealed class WeatherViewModelEvent() {
     object Exception : WeatherViewModelEvent()
     object EmptyFavouriteCity : WeatherViewModelEvent()
     object SavedFavouriteCity : WeatherViewModelEvent()
+    object GotCity : WeatherViewModelEvent()
+    object GotForecast : WeatherViewModelEvent()
+    object GotPollution : WeatherViewModelEvent()
 }

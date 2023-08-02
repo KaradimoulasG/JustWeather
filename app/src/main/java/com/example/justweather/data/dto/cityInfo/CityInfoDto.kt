@@ -14,5 +14,5 @@ data class CityInfoDto(
     @field:Json(name = "sys") val sys: SysDto,
     @field:Json(name = "visibility") val visibility: Int,
     @field:Json(name = "weather") val weather: List<WeatherDto>,
-    @field:Json(name = "wind") val windDto: WindDto,
+    @field:Json(name = "wind") val wind: WindDto,
 )

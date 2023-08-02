@@ -13,7 +13,7 @@ import com.example.justweather.data.dto.cityInfo.WindDto
 @Entity
 data class CityInfo(
     val base: String,
-    val clouds: CloudsDto,
+    val clouds: CloudsDto? = null,
     val code: Int,
     val coordination: CoordinationDto,
     val timestamp: Int,
@@ -40,5 +40,5 @@ fun CityInfoDto.toCityInfo() =
         system = sys,
         visibility = visibility,
         weather = weather,
-        wind = windDto,
+        wind = wind,
     )
