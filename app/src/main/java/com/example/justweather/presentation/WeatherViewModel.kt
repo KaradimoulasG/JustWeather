@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.justweather.common.extensions.onError
 import com.example.justweather.common.extensions.onException
 import com.example.justweather.common.extensions.onSuccess
+import com.example.justweather.data.dto.airPollution.AirPollutionDetailsDto
 import com.example.justweather.data.repositories.ICityRepo
 import com.example.justweather.domain.model.ForecastInfo
+import com.example.justweather.domain.model.toAirPollution
 import com.example.justweather.domain.model.toCityInfo
 import com.example.justweather.domain.model.toForecast
 import com.example.justweather.domain.model.toForecastInfo
@@ -52,7 +54,6 @@ class WeatherViewModel(
                     )
                 }
                 getForecast(model.coordination.lat, model.coordination.lon)
-                getPollution(model.coordination.lat, model.coordination.lon)
             }.onException {
                 _state.update {
                     it.copy(
@@ -82,6 +83,7 @@ class WeatherViewModel(
                         forecastList = forecastList,
                     )
                 }
+                getPollution(lat, lon)
             }.onException {
                 _state.update {
                     it.copy(
@@ -103,9 +105,23 @@ class WeatherViewModel(
             val response = cityRepo.getAirPollution(lat, lon)
 
             response.onSuccess {
+                val result = it.toAirPollution()
                 _state.update { state ->
                     state.copy(
                         eventName = WeatherViewModelEvent.GotPollution,
+                        airPollutionDetails = result.detailsList,
+                    )
+                }
+            }.onException {
+                _state.update {
+                    it.copy(
+                        eventName = WeatherViewModelEvent.Fail,
+                    )
+                }
+            }.onError { _, _ ->
+                _state.update {
+                    it.copy(
+                        eventName = WeatherViewModelEvent.Loading,
                     )
                 }
             }
@@ -124,6 +140,7 @@ data class WeatherState(
     val humidity: Int? = 0,
     val pressure: Int? = 0,
     val forecastList: List<ForecastInfo> = listOf(),
+    val airPollutionDetails: List<AirPollutionDetailsDto> = listOf(),
     val message: String = "",
 )
 

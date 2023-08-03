@@ -5,6 +5,8 @@
     <string name="date_time_title">%s</string>
     <string name="local_temp">%d°C</string>
     <string name="real_feel">Real feel : %.1f°C</string>
+    <string name="pollution_title">Air Pollution</string>
+    <string name="five_day_forecast_title">Five Day Forecast</string>
 
 <!--  Three piece component strings  -->
 

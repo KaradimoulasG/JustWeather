@@ -46,9 +46,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {
-                    WeatherViewModelEvent.Loading -> Timber.i("PAOK we wait")
+                    WeatherViewModelEvent.Loading -> Timber.i("we wait")
                     WeatherViewModelEvent.GotCity -> populateMainViews(viewModel.state.value)
                     WeatherViewModelEvent.GotForecast -> populateForecastView(viewModel.state.value)
+                    WeatherViewModelEvent.GotPollution -> populateAirPollutionView(viewModel.state.value)
                     WeatherViewModelEvent.EmptyFavouriteCity -> Timber.i("did not work")
                     else -> {}
                 }
@@ -77,5 +78,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
 
     private fun populateForecastView(value: WeatherState) {
         forecastAdapter.addAll(value.forecastList)
+    }
+
+    private fun populateAirPollutionView(value: WeatherState) {
+        binding.apply {
+            airPollutionSlider.value = value.airPollutionDetails[0].main.aqi.toFloat()
+        }
     }
 }
