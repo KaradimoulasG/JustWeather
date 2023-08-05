@@ -40,6 +40,7 @@ class WeatherViewModel(
 
             response.onSuccess { apiResponse ->
                 val model = apiResponse.toCityInfo()
+                timber.log.Timber.i("Favourite City here with ${cityRepo.getFavouriteCity()}")
                 _state.update { state ->
                     state.copy(
                         eventName = WeatherViewModelEvent.GotCity,
@@ -145,14 +146,14 @@ data class WeatherState(
 )
 
 sealed class WeatherViewModelEvent() {
-    data object None : WeatherViewModelEvent()
-    data object Loading : WeatherViewModelEvent()
-    data object Success : WeatherViewModelEvent()
-    data object Fail : WeatherViewModelEvent()
-    data object Exception : WeatherViewModelEvent()
-    data object EmptyFavouriteCity : WeatherViewModelEvent()
-    data object SavedFavouriteCity : WeatherViewModelEvent()
-    data object GotCity : WeatherViewModelEvent()
-    data object GotForecast : WeatherViewModelEvent()
-    data object GotPollution : WeatherViewModelEvent()
+    object None : WeatherViewModelEvent()
+    object Loading : WeatherViewModelEvent()
+    object Success : WeatherViewModelEvent()
+    object Fail : WeatherViewModelEvent()
+    object Exception : WeatherViewModelEvent()
+    object EmptyFavouriteCity : WeatherViewModelEvent()
+    object SavedFavouriteCity : WeatherViewModelEvent()
+    object GotCity : WeatherViewModelEvent()
+    object GotForecast : WeatherViewModelEvent()
+    object GotPollution : WeatherViewModelEvent()
 }

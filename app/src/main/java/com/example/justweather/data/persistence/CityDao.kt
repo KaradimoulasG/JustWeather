@@ -13,7 +13,7 @@ interface CityDao {
 
     @Query("SELECT * FROM CityInfo")
     suspend fun getFavouriteCity(): CityInfo
-//
+
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertSavedCities(cities: List<CityInfo>)
 }

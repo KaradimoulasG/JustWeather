@@ -24,7 +24,7 @@ data class ForecastInfo(
 fun List<InfoDto>.toForecastInfo() =
     map { infoDto ->
         ForecastInfo(
-            clouds = infoDto.clouds,
+            clouds = infoDto.clouds!!,
             timestamp = infoDto.dt,
             timestampText = infoDto.dt_txt,
             mainDetails = infoDto.main,

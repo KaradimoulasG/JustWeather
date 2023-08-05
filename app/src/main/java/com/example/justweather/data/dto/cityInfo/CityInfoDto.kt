@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class CityInfoDto(
     @field:Json(name = "base") val base: String,
-    @field:Json(name = "clouds") val cloudsDto: CloudsDto,
+    @field:Json(name = "clouds") val cloudsDto: CloudsDto? = null,
     @field:Json(name = "cod") val cod: Int,
     @field:Json(name = "coord") val coord: CoordinationDto,
     @field:Json(name = "dt") val dt: Int,

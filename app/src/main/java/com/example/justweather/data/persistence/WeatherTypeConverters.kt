@@ -16,7 +16,7 @@ class WeatherTypeConverters {
     private val gson = Gson()
 
     @TypeConverter
-    fun fromClouds(cloudsDto: CloudsDto) = gson.toJson(cloudsDto)
+    fun fromClouds(cloudsDto: CloudsDto? = null) = gson.toJson(cloudsDto)
 
     @TypeConverter
     fun toClouds(json: String) = gson.fromJson(json, CloudsDto::class.java)

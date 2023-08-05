@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 val cityModule = module {
 
-    single<ICityRepo> { CityRepoImpl(get()) }
+    single<ICityRepo> { CityRepoImpl(get(), get()) }
 
     single { WeatherViewModel(get(), get()) }
 

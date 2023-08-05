@@ -3,7 +3,7 @@ package com.example.justweather.common
 object Constants {
 
     const val BASE_URL = "https://api.openweathermap.org/"
-    const val API_KEY = "will be used only during testing time and will not be uploaded"
+    const val API_KEY = "0ab7596f6d9e7f171a26226d63141613"
 }
 
 object StatusCode {

@@ -5,7 +5,7 @@ import com.example.justweather.data.dto.cityInfo.WeatherDto
 import com.squareup.moshi.Json
 
 data class InfoDto(
-    @field:Json(name = "clouds") val clouds: CloudsDto,
+    @field:Json(name = "clouds") val clouds: CloudsDto? = null,
     @field:Json(name = "dt") val dt: Int,
     @field:Json(name = "dt_txt") val dt_txt: String,
     @field:Json(name = "main") val main: ForecastMainDto,
