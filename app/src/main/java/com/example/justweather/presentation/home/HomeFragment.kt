@@ -33,10 +33,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViewModel()
-        binding.forecastRv.apply {
-            layoutManager = LinearLayoutManager(activity?.applicationContext)
-            adapter = forecastAdapter
-        }
+        setUpUi()
         populateMainViews(viewModel.state.value)
     }
 
@@ -49,11 +46,28 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                     WeatherViewModelEvent.Loading -> Timber.i("we wait")
                     WeatherViewModelEvent.GotCity -> populateMainViews(viewModel.state.value)
                     WeatherViewModelEvent.GotForecast -> populateForecastView(viewModel.state.value)
-                    WeatherViewModelEvent.GotPollution -> populateAirPollutionView(viewModel.state.value)
+                    WeatherViewModelEvent.GotPollution -> {
+                        binding.weatherRefresher.isRefreshing = false
+                        populateAirPollutionView(viewModel.state.value)
+                    }
                     WeatherViewModelEvent.EmptyFavouriteCity -> Timber.i("did not work")
                     else -> {}
                 }
             }.launchIn(this)
+        }
+    }
+
+    private fun setUpUi() {
+        binding.apply {
+            forecastRv.apply {
+                layoutManager = LinearLayoutManager(activity?.applicationContext,LinearLayoutManager.HORIZONTAL, false)
+                adapter = forecastAdapter
+            }
+
+            weatherRefresher.apply {
+                isRefreshing = false
+                setOnRefreshListener { viewModel.getCityInfo("Thessaloniki") }
+            }
         }
     }
 

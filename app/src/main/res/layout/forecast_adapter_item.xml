@@ -1,47 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_layout"
-    android:layout_margin="10dp"
-    android:clipToOutline="false"
-    android:clipToPadding="false"
-    android:elevation="8dp"
-    android:outlineAmbientShadowColor="@color/light_gray"
-    android:outlineSpotShadowColor="@color/light_gray">
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
+    android:layout_marginEnd="12dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/date_time_tv"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_weight="1"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        tools:text="Wednesday\n 22-03-1990\n 13:00:00" />
+        tools:text="Wed\n 12:00"
+        android:layout_marginStart="6dp"
+        android:gravity="center"
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/weather_iv"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"
-        android:layout_weight="1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:gravity="center"
         tools:src="@drawable/ic_snow_day" />
 
     <TextView
         android:id="@+id/temperature_tv"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"
-        android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="32sp"
-        tools:text="22C" />
-
+        android:layout_marginStart="6dp"
+        android:textSize="16sp"
+        tools:text="22°C" />
 
 </LinearLayout>

@@ -23,8 +23,8 @@ fun Int.transformToDate(): String {
 
 @SuppressLint("SimpleDateFormat")
 fun Int.transformToDateIndented(): String {
-    val simpleDate = SimpleDateFormat("E\n, dd/M/yyyy\n hh:mm")
-    return simpleDate.format(Date())
+    val simpleDate = SimpleDateFormat("E,\nhh:mm")
+    return simpleDate.format(this)
 }
 
 fun String.showWeatherIcon() =

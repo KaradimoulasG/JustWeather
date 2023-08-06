@@ -3,8 +3,6 @@ q
 Aapp/src/main/java/com/example/justweather/di/persistenceModule.kt,a\d\ad5e6047bd8e997db07a5ea597f5defc01a30546
 z
 Japp/src/main/java/com/example/justweather/data/dto/forecast/ForecastDto.kt,9\d\9de6c23b0aac35d1bfa1e22f754c0f2a04509dde
-~
-Napp/src/main/java/com/example/justweather/data/dto/forecast/ForecastMainDto.kt,0\4\04e73d9cbb8f1f9505f6de3bd4acf0eb46f4152e
 w
 G.idea/sonarlint/issuestore/c/d/cd0f93032a71d20cf91ac45425727c1e3a9b2f22,e\d\ed2d2e3d92ad2ecb3e026b86ba71f4b8d709884e
 v
@@ -21,3 +19,7 @@ v
 Fapp/src/main/java/com/example/justweather/data/dto/cityInfo/MainDto.kt,a\6\a6d8a38579543585facfbbff133182bfeb22b8a0
 y
 Iapp/src/main/java/com/example/justweather/presentation/BindingFragment.kt,7\f\7f36008d4831136a21a5ad390fee9f372e852b01
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35

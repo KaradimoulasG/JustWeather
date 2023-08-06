@@ -13,6 +13,7 @@
         android:fillViewport="true">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/weather_refresher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
@@ -25,7 +26,8 @@
                 android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/rounded_layout"
                 android:elevation="6dp"
                 android:orientation="vertical"
@@ -119,54 +121,62 @@
                 android:elevation="8dp"
                 android:clipToOutline="false" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/forecast_rv"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp" />
-
-            <LinearLayout
-                android:id="@+id/five_day_forecast_layout"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/rounded_layout"
-                android:elevation="6dp"
-                android:orientation="vertical"
                 android:outlineAmbientShadowColor="@color/light_gray"
-                android:outlineSpotShadowColor="@color/light_gray" >
-
+                android:outlineSpotShadowColor="@color/light_gray"
+                android:elevation="6dp" >
 
                 <LinearLayout
-                    android:id="@+id/five_day_forecast_title"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/five_day_forecast_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical" >
 
-                    <TextView
+
+                    <LinearLayout
+                        android:id="@+id/five_day_forecast_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/five_day_forecast_title"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginEnd="8dp"
-                        android:textSize="24sp"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal" >
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_info"
-                        android:layout_marginTop="18dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/five_day_forecast_title"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginEnd="6dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_info"
+                            android:layout_marginTop="18dp" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/forecast_rv"
+                        android:layout_width="match_parent"
+                        android:visibility="visible"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:requiresFadingEdge="horizontal"
+                        android:layout_height="wrap_content" />
+
 
                 </LinearLayout>
 
-
-            </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
             <LinearLayout
                 android:id="@+id/air_pollution_layout"
@@ -192,7 +202,7 @@
                         android:text="@string/pollution_title"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="8dp"
-                        android:textSize="24sp"
+                        android:textSize="20sp"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 

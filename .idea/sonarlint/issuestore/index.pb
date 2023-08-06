@@ -17,14 +17,10 @@ w
 G.idea/sonarlint/issuestore/f/1/f10ef93ec76b9386c4c864d323267d06c3073879,e\6\e624185d31a9cc1a1ac6b46b321d49cf801c05a3
 w
 G.idea/sonarlint/issuestore/8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e,3\2\32813322c99a6c8a141ab2dc12bc10af3425f1b4
-X
-(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 y
 Iapp/src/main/java/com/example/justweather/data/persistence/AppDatabase.kt,2\7\2792e9182b0afb575a954c36f1fc3ec461536452
 o
 ?app/src/main/java/com/example/justweather/WeatherApplication.kt,9\c\9cb1102b5ed1dffb577a0def3643794404a9e9df
-A
-gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 w
 G.idea/sonarlint/issuestore/3/2/32813322c99a6c8a141ab2dc12bc10af3425f1b4,b\8\b86279fa0f08a48815766b267d844d29fcd222d5
 w
@@ -52,8 +48,6 @@ G.idea/sonarlint/issuestore/5/1/516e730a14e71f02fa73f3acd6dc7cea9a9fe002,9\9\99
 w
 G.idea/sonarlint/issuestore/b/8/b86279fa0f08a48815766b267d844d29fcd222d5,f\8\f86b40dee983d2dfc084335251baec50210ce2e0
 w
-G.idea/sonarlint/issuestore/5/0/50736aac10764b60e34da384d06d4558e1b94e3c,7\3\735d597da712ef676349f2813811644838d304c7
-w
 G.idea/sonarlint/issuestore/5/2/52114fdaa426e9b83a3c5df4e11c4f0ebbcd814b,6\c\6c2193e090c53ebe039a28ee0f93415902762a26
 w
 G.idea/sonarlint/issuestore/4/c/4c1215ac91b89954c0bd88a3c49cf40e2caa4ee1,b\1\b10639e465dcd72a2eaa3b22991faf12fad0a800
@@ -63,10 +57,6 @@ w
 G.idea/sonarlint/issuestore/1/d/1da0c0ce5ee2ede2bc8c23aa4c22a62ab4a02526,d\8\d8053b3119d707e74d32189f9b7a5ba2193339b7
 w
 G.idea/sonarlint/issuestore/b/1/b10639e465dcd72a2eaa3b22991faf12fad0a800,d\1\d1b143983904a1e732f397a6dfb6abbaf3f7aa86
-w
-G.idea/sonarlint/issuestore/7/3/735d597da712ef676349f2813811644838d304c7,4\3\43cf735f771297431cc97d2a97b2aeb7e2fa6ba6
-w
-G.idea/sonarlint/issuestore/a/2/a23440fc1b6f43124479b3f656018bd2464c9cd7,9\3\93ff4eeb9abda94b5d009495175abac782e7e61c
 w
 G.idea/sonarlint/issuestore/f/8/f86b40dee983d2dfc084335251baec50210ce2e0,7\e\7e4b8b834b8d1570742b9e08ac7c3fac45b8c7a8
 w
@@ -85,8 +75,6 @@ z
 Japp/src/main/java/com/example/justweather/data/dto/forecast/ForecastDto.kt,9\d\9de6c23b0aac35d1bfa1e22f754c0f2a04509dde
 q
 Aapp/src/main/java/com/example/justweather/di/persistenceModule.kt,a\d\ad5e6047bd8e997db07a5ea597f5defc01a30546
-~
-Napp/src/main/java/com/example/justweather/data/dto/forecast/ForecastMainDto.kt,0\4\04e73d9cbb8f1f9505f6de3bd4acf0eb46f4152e
 w
 G.idea/sonarlint/issuestore/c/d/cd0f93032a71d20cf91ac45425727c1e3a9b2f22,e\d\ed2d2e3d92ad2ecb3e026b86ba71f4b8d709884e
 v
@@ -103,3 +91,7 @@ Fapp/src/main/java/com/example/justweather/data/dto/cityInfo/MainDto.kt,a\6\a6d
 Lapp/src/main/java/com/example/justweather/common/extensions/ApiExtensions.kt,a\d\ad03111b77acd7b78abd5bc12a9d3abd26bff54d
 y
 Iapp/src/main/java/com/example/justweather/presentation/BindingFragment.kt,7\f\7f36008d4831136a21a5ad390fee9f372e852b01
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
