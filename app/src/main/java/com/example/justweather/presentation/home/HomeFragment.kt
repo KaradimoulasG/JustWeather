@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.justweather.R
 import com.example.justweather.common.extensions.showWeatherIcon
-import com.example.justweather.common.extensions.transformToDate
+import com.example.justweather.common.extensions.toDate
 import com.example.justweather.databinding.FragmentHomeBinding
 import com.example.justweather.presentation.BindingFragment
 import com.example.justweather.presentation.WeatherState
@@ -72,7 +72,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
     }
 
     private fun populateMainViews(stateValue: WeatherState) {
-        val date = stateValue.dateTime?.transformToDate()
+        val date = stateValue.dateTime?.toDate()
         val iconToShow = stateValue.weatherIcon.showWeatherIcon()
 
         binding.apply {

@@ -12,15 +12,16 @@
         android:id="@+id/date_time_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Wed\n 12:00"
-        android:layout_marginStart="6dp"
+        tools:text="Dey\n 12:00"
         android:gravity="center"
+        android:layout_gravity="center"
         android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/weather_iv"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_gravity="center"
         android:gravity="center"
         tools:src="@drawable/ic_snow_day" />
 
@@ -29,7 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginStart="6dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="2dp"
         android:textSize="16sp"
         tools:text="22°C" />
 

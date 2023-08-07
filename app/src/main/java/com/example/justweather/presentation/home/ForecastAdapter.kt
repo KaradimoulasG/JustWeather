@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.justweather.R
 import com.example.justweather.common.extensions.showWeatherIcon
-import com.example.justweather.common.extensions.transformToDateIndented
+import com.example.justweather.common.extensions.toDateFormatted
 import com.example.justweather.domain.model.ForecastInfo
 import kotlin.math.roundToInt
 
@@ -36,8 +36,10 @@ class ForecastAdapter : ListAdapter<ForecastInfo, ForecastAdapter.ForecastViewHo
         fun bind(holder: ForecastViewHolder, pos: Int) {
             val result = currentList[pos]
             val context = holder.itemView.context
-            val dateTimeFormatted = result.timestamp.transformToDateIndented()
+            val dateTimeFormatted = toDateFormatted(result.timestamp)
             val iconToShow = result.weatherDetails[0].icon.showWeatherIcon()
+
+            timber.log.Timber.i("PAOK the date is ${result.timestamp} and ${dateTimeFormatted} ")
 
             holder.dateTime.text = dateTimeFormatted
             Glide.with(context).load(iconToShow).into(holder.weatherIcon)

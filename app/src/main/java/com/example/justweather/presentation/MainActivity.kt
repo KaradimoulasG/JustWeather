@@ -3,6 +3,9 @@ package com.example.justweather.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import com.example.justweather.R
 import com.example.justweather.databinding.ActivityMainBinding
 import com.example.justweather.di.cityModule
 import kotlinx.coroutines.flow.launchIn
@@ -21,16 +24,38 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadKoinModules(cityModule)
+//        loadKoinModules(cityModule)
         setUpViewModel()
     }
 
     override fun onResume() {
         super.onResume()
+        setUpUi()
+    }
 
+    private fun setUpUi() {
         binding.bottomNavigationView.apply {
             background = null
             menu.getItem(3).isEnabled = false
+        }
+
+        val navController = Navigation.findNavController(this, R.id.nav_host)
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment -> {
+                    timber.log.Timber.i("PAOK home")
+                    navController.navigate(R.id.homeFragment)
+                    true
+                }
+                R.id.searchFragment -> {
+                    timber.log.Timber.i("PAOK search")
+                    navController.navigate(R.id.searchFragment)
+                    true
+                }
+                else -> false
+            }
         }
     }
 
@@ -50,6 +75,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unloadKoinModules(cityModule)
+//        unloadKoinModules(cityModule)
     }
 }

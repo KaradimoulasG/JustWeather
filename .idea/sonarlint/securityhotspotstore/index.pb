@@ -19,7 +19,3 @@ v
 Fapp/src/main/java/com/example/justweather/data/dto/cityInfo/MainDto.kt,a\6\a6d8a38579543585facfbbff133182bfeb22b8a0
 y
 Iapp/src/main/java/com/example/justweather/presentation/BindingFragment.kt,7\f\7f36008d4831136a21a5ad390fee9f372e852b01
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35

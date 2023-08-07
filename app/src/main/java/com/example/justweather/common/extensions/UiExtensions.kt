@@ -5,7 +5,6 @@ import android.view.View
 import com.example.justweather.R
 import com.example.justweather.common.WeatherDescription
 import java.text.SimpleDateFormat
-import java.util.Date
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -16,16 +15,35 @@ fun View.hide() {
 }
 
 @SuppressLint("SimpleDateFormat")
-fun Int.transformToDate(): String {
+fun Int.toDate(): String {
     val simpleDate = SimpleDateFormat("E, dd/M/yyyy hh:mm:ss")
-    return simpleDate.format(Date())
+    return simpleDate.format(this)
 }
 
 @SuppressLint("SimpleDateFormat")
-fun Int.transformToDateIndented(): String {
-    val simpleDate = SimpleDateFormat("E,\nhh:mm")
-    return simpleDate.format(this)
+fun toDateFormatted(timestamp: Int): String {
+//    val simpleDate = SimpleDateFormat("E,\nhh:mm")
+//    return simpleDate.format(this)
+
+//    if (this == null) return ""
+//    // Get instance of calendar
+//    val calendar = Calendar.getInstance(Locale.getDefault())
+//    // get current date from ts
+//    calendar.timeInMillis = this.toLong()
+//    // return formatted date
+//    return android.text.format.DateFormat.format("E, hh:mm", calendar).toString()
+
+//    val sdf = SimpleDateFormat("dd/MM/yy hh:mm a")
+//    val netDate = Date(this.toLong())
+//    return sdf.format(netDate)
+
+    val day = SimpleDateFormat("EEEE").format(timestamp * 1000)
+    val time = SimpleDateFormat("HH:mm").format(timestamp * 1000)
+    return "$day\n$time"
 }
+
+// @SuppressLint("SimpleDateFormat")
+// fun Int.toDateFormatted(): String = SimpleDateFormat("E,\nhh:mm").format(this)
 
 fun String.showWeatherIcon() =
     when (this) {
