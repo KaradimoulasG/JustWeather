@@ -7,6 +7,7 @@ import com.example.justweather.common.extensions.onException
 import com.example.justweather.common.extensions.onSuccess
 import com.example.justweather.data.dto.airPollution.AirPollutionDetailsDto
 import com.example.justweather.data.repositories.ICityRepo
+import com.example.justweather.domain.model.CityInfo
 import com.example.justweather.domain.model.ForecastInfo
 import com.example.justweather.domain.model.toAirPollution
 import com.example.justweather.domain.model.toCityInfo
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class WeatherViewModel(
     private val cityRepo: ICityRepo,
@@ -36,7 +38,8 @@ class WeatherViewModel(
                 state.copy(eventName = WeatherViewModelEvent.Loading)
             }
 
-            val response = cityRepo.getCityInfo(city)
+            val cityToSearch = if (_state.value.searchedCity.isNullOrEmpty()) city else _state.value.searchedCity
+            val response = cityRepo.getCityInfo(cityToSearch)
 
             response.onSuccess { apiResponse ->
                 val model = apiResponse.toCityInfo()
@@ -44,6 +47,7 @@ class WeatherViewModel(
                 _state.update { state ->
                     state.copy(
                         eventName = WeatherViewModelEvent.GotCity,
+                        apiResponse = model,
                         cityName = city,
                         dateTime = model.timestamp,
                         currentTemp = model.mainDetails.temp,
@@ -52,21 +56,14 @@ class WeatherViewModel(
                         windSpeed = model.windDetails.speed,
                         pressure = model.mainDetails.pressure,
                         humidity = model.mainDetails.humidity,
+                        searchedCity = "",
                     )
                 }
                 getForecast(model.coordination.lat, model.coordination.lon)
             }.onException {
-                _state.update {
-                    it.copy(
-                        eventName = WeatherViewModelEvent.Fail,
-                    )
-                }
+                handleOfflineCaching()
             }.onError { _, _ ->
-                _state.update {
-                    it.copy(
-                        eventName = WeatherViewModelEvent.Loading,
-                    )
-                }
+                handleOfflineCaching()
             }
         }
     }
@@ -128,11 +125,48 @@ class WeatherViewModel(
             }
         }
     }
+
+    fun setCityToSearch(cityName: String) {
+        _state.update { it.copy(searchedCity = cityName) }
+        getCityInfo(cityName)
+    }
+
+    fun saveFavouriteCity() {
+        viewModelScope.launch {
+            _state.value.apiResponse?.let { cityRepo.saveFavouriteCity(_state.value.apiResponse!!) }
+        }
+    }
+
+    private fun handleOfflineCaching() {
+        viewModelScope.launch {
+            val dao = cityRepo.getFavouriteCity()
+            _state.update { state ->
+                state.copy(
+                    eventName = if (dao.cityName.isNullOrEmpty()) WeatherViewModelEvent.OfflineMode else WeatherViewModelEvent.CachedCity,
+                    apiResponse = dao,
+                )
+            }
+
+//            when (dao.cityName) {
+//                null -> _state.update { it.copy(eventName = WeatherViewModelEvent.OfflineMode) }
+//                else -> {
+//                    _state.update { state ->
+//                        state.copy(
+//                            eventName = WeatherViewModelEvent.CachedCity,
+//                            apiResponse = dao,
+//                        )
+//                    }
+//                }
+//            }
+        }
+    }
 }
 
 data class WeatherState(
     val eventName: WeatherViewModelEvent = WeatherViewModelEvent.None,
+    val apiResponse: CityInfo? = null,
     val cityName: String = "",
+    val searchedCity: String = "",
     val dateTime: Int? = null,
     val currentTemp: Double = 0.0,
     val realFeel: Double = 0.0,
@@ -150,9 +184,11 @@ sealed class WeatherViewModelEvent() {
     object Loading : WeatherViewModelEvent()
     object Success : WeatherViewModelEvent()
     object Fail : WeatherViewModelEvent()
+    object OfflineMode : WeatherViewModelEvent()
     object Exception : WeatherViewModelEvent()
     object EmptyFavouriteCity : WeatherViewModelEvent()
     object SavedFavouriteCity : WeatherViewModelEvent()
+    object CachedCity : WeatherViewModelEvent()
     object GotCity : WeatherViewModelEvent()
     object GotForecast : WeatherViewModelEvent()
     object GotPollution : WeatherViewModelEvent()

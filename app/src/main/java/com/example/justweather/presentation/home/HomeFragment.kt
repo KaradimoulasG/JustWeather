@@ -11,6 +11,7 @@ import com.example.justweather.R
 import com.example.justweather.common.extensions.showWeatherIcon
 import com.example.justweather.common.extensions.toDate
 import com.example.justweather.databinding.FragmentHomeBinding
+import com.example.justweather.domain.model.CityInfo
 import com.example.justweather.presentation.BindingFragment
 import com.example.justweather.presentation.WeatherState
 import com.example.justweather.presentation.WeatherViewModel
@@ -34,7 +35,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setUpViewModel()
         setUpUi()
-        populateMainViews(viewModel.state.value)
+//        populateMainViews(viewModel.state.value)
     }
 
     private fun setUpViewModel() {
@@ -50,6 +51,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                         binding.weatherRefresher.isRefreshing = false
                         populateAirPollutionView(viewModel.state.value)
                     }
+                    WeatherViewModelEvent.CachedCity -> offlineMode(viewModel.state.value.apiResponse)
                     WeatherViewModelEvent.EmptyFavouriteCity -> Timber.i("did not work")
                     else -> {}
                 }
@@ -86,6 +88,25 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 stateValue.windSpeed!!.roundToInt(),
                 stateValue.humidity!!,
                 stateValue.pressure!!,
+            )
+        }
+    }
+
+    private fun offlineMode(apiResponse: CityInfo?) {
+        val date = apiResponse?.timestamp?.toDate()
+        val iconToShow = apiResponse?.weatherDetails?.get(0)?.icon?.showWeatherIcon()
+
+        binding.apply {
+            cityNameTv.text = getString(R.string.city_name_title, apiResponse?.cityName)
+            dateTimeTv.text = getString(R.string.date_time_title, date)
+            tempTv.text = getString(R.string.local_temp, apiResponse?.mainDetails?.temp?.roundToInt())
+            realFeelTv.text = getString(R.string.real_feel, apiResponse?.mainDetails?.feels_like)
+            Glide.with(this@HomeFragment).load(iconToShow).into(weatherIv)
+
+            threePieceComponent.setUpComponent(
+                apiResponse?.windDetails?.speed!!.roundToInt(),
+                apiResponse?.mainDetails?.humidity!!,
+                apiResponse?.mainDetails?.pressure!!,
             )
         }
     }

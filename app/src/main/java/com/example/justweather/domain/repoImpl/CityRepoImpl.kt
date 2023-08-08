@@ -5,7 +5,6 @@ import com.example.justweather.data.persistence.CityDao
 import com.example.justweather.data.repositories.ICityRepo
 import com.example.justweather.domain.model.CityInfo
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class CityRepoImpl(
     private val api: OpenWeatherApi,
@@ -24,14 +23,8 @@ class CityRepoImpl(
 
     override suspend fun saveFavouriteCity(city: CityInfo) {
         cityDao.insertFavouriteCity(city)
-        timber.log.Timber.i("PAOK here")
     }
 
-    override suspend fun getFavouriteCity(): CityInfo? {
-        val cityName = cityDao.getFavouriteCity()
-        return when (cityName.cityName.isNullOrBlank()) {
-            true -> null
-            false -> cityDao.getFavouriteCity()
-        }
-    }
+    override suspend fun getFavouriteCity() =
+        cityDao.getFavouriteCity()
 }

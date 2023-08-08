@@ -13,5 +13,5 @@ interface ICityRepo {
     suspend fun getAirPollution(latitude: Double, longitude: Double): NetworkResult<AirPollutionDto>
 
     suspend fun saveFavouriteCity(city: CityInfo)
-    suspend fun getFavouriteCity(): CityInfo?
+    suspend fun getFavouriteCity(): CityInfo
 }

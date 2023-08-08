@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private fun setUpUi() {
         NavigationUI.setupWithNavController(binding.bottomNavigationView, findNavController(R.id.nav_host))
 
+        binding.fab.setOnClickListener { viewModel.saveFavouriteCity() }
+
         binding.bottomNavigationView.apply {
             background = null
             menu.getItem(3).isEnabled = false
