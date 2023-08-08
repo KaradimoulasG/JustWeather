@@ -7,16 +7,12 @@ Yapp/src/main/java/com/example/justweather/data/networkResultHandling/NetworkRes
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 |
 Lapp/src/main/java/com/example/justweather/data/persistence/CityInfoEntity.kt,f\1\f10ef93ec76b9386c4c864d323267d06c3073879
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 i
 9app/src/main/java/com/example/justweather/di/ApiModule.kt,1\7\172682d88eeb6e5779324cb4fa632ebe8413f1e8
 w
 G.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d,b\4\b4a0b63ce8560bbc5de0f9995c20cc861dc2adb3
 w
 G.idea/sonarlint/issuestore/f/1/f10ef93ec76b9386c4c864d323267d06c3073879,e\6\e624185d31a9cc1a1ac6b46b321d49cf801c05a3
-w
-G.idea/sonarlint/issuestore/8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e,3\2\32813322c99a6c8a141ab2dc12bc10af3425f1b4
 y
 Iapp/src/main/java/com/example/justweather/data/persistence/AppDatabase.kt,2\7\2792e9182b0afb575a954c36f1fc3ec461536452
 w
@@ -25,8 +21,6 @@ w
 G.idea/sonarlint/issuestore/e/6/e624185d31a9cc1a1ac6b46b321d49cf801c05a3,4\c\4c1215ac91b89954c0bd88a3c49cf40e2caa4ee1
 w
 G.idea/sonarlint/issuestore/b/4/b4a0b63ce8560bbc5de0f9995c20cc861dc2adb3,b\0\b04578cffb47b1e57970601a0cacef6081245859
-w
-G.idea/sonarlint/issuestore/9/c/9cb1102b5ed1dffb577a0def3643794404a9e9df,5\6\5668aec7b196159022711a80b990893843185678
 w
 G.idea/sonarlint/issuestore/1/7/172682d88eeb6e5779324cb4fa632ebe8413f1e8,6\6\66256e65fe82e19f049bce9fc096701cee332417
 w
@@ -41,8 +35,6 @@ w
 G.idea/sonarlint/issuestore/b/8/b86279fa0f08a48815766b267d844d29fcd222d5,f\8\f86b40dee983d2dfc084335251baec50210ce2e0
 w
 G.idea/sonarlint/issuestore/4/c/4c1215ac91b89954c0bd88a3c49cf40e2caa4ee1,b\1\b10639e465dcd72a2eaa3b22991faf12fad0a800
-w
-G.idea/sonarlint/issuestore/5/6/5668aec7b196159022711a80b990893843185678,4\8\4826af74552b25fe9e156c671f607b28ba2cf365
 w
 G.idea/sonarlint/issuestore/1/d/1da0c0ce5ee2ede2bc8c23aa4c22a62ab4a02526,d\8\d8053b3119d707e74d32189f9b7a5ba2193339b7
 w
@@ -77,3 +69,7 @@ Fapp/src/main/java/com/example/justweather/data/dto/cityInfo/MainDto.kt,a\6\a6d
 Lapp/src/main/java/com/example/justweather/common/extensions/ApiExtensions.kt,a\d\ad03111b77acd7b78abd5bc12a9d3abd26bff54d
 y
 Iapp/src/main/java/com/example/justweather/presentation/BindingFragment.kt,7\f\7f36008d4831136a21a5ad390fee9f372e852b01
+z
+Japp/src/main/java/com/example/justweather/presentation/WeatherViewModel.kt,9\8\98a172068807ea81100677951f99ed33c5fe6083
+{
+Kapp/src/main/java/com/example/justweather/common/extensions/UiExtensions.kt,a\5\a59a0f13c3507c7fd5606e7ae5ecdcb51d19a319

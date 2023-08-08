@@ -3,17 +3,14 @@ package com.example.justweather.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.justweather.R
 import com.example.justweather.databinding.ActivityMainBinding
-import com.example.justweather.di.cityModule
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.context.loadKoinModules
-import org.koin.core.context.unloadKoinModules
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        loadKoinModules(cityModule)
         setUpViewModel()
     }
 
@@ -34,27 +30,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpUi() {
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, findNavController(R.id.nav_host))
+
         binding.bottomNavigationView.apply {
             background = null
             menu.getItem(3).isEnabled = false
-        }
 
-        val navController = Navigation.findNavController(this, R.id.nav_host)
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
-
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.homeFragment -> {
-                    timber.log.Timber.i("PAOK home")
-                    navController.navigate(R.id.homeFragment)
-                    true
+            setOnItemSelectedListener { item ->
+                when (item.title) {
+                    getString(R.string.bottom_nav_option_home) -> {
+                        findNavController(R.id.nav_host).navigate(R.id.homeFragment)
+                        true
+                    }
+                    getString(R.string.bottom_nav_option_search) -> {
+                        findNavController(R.id.nav_host).navigate(R.id.searchFragment)
+                        true
+                    }
+                    else -> false
                 }
-                R.id.searchFragment -> {
-                    timber.log.Timber.i("PAOK search")
-                    navController.navigate(R.id.searchFragment)
-                    true
-                }
-                else -> false
             }
         }
     }
@@ -71,10 +64,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }.launchIn(this)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        unloadKoinModules(cityModule)
     }
 }

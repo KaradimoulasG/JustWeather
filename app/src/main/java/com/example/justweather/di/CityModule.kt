@@ -6,7 +6,7 @@ import com.example.justweather.domain.useCases.GetForecastUseCase
 import com.example.justweather.presentation.WeatherViewModel
 import org.koin.dsl.module
 
-val cityModule = module {
+val CityModule = module {
 
     single<ICityRepo> { CityRepoImpl(get(), get()) }
 

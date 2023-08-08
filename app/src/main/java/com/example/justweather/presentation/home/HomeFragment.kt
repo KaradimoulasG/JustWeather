@@ -60,7 +60,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
     private fun setUpUi() {
         binding.apply {
             forecastRv.apply {
-                layoutManager = LinearLayoutManager(activity?.applicationContext,LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.HORIZONTAL, false)
                 adapter = forecastAdapter
             }
 

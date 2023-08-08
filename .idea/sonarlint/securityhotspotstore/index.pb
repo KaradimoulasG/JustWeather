@@ -19,3 +19,7 @@ v
 Fapp/src/main/java/com/example/justweather/data/dto/cityInfo/MainDto.kt,a\6\a6d8a38579543585facfbbff133182bfeb22b8a0
 y
 Iapp/src/main/java/com/example/justweather/presentation/BindingFragment.kt,7\f\7f36008d4831136a21a5ad390fee9f372e852b01
+z
+Japp/src/main/java/com/example/justweather/presentation/WeatherViewModel.kt,9\8\98a172068807ea81100677951f99ed33c5fe6083
+{
+Kapp/src/main/java/com/example/justweather/common/extensions/UiExtensions.kt,a\5\a59a0f13c3507c7fd5606e7ae5ecdcb51d19a319

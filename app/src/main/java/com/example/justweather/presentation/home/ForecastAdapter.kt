@@ -16,7 +16,7 @@ import com.example.justweather.domain.model.ForecastInfo
 import kotlin.math.roundToInt
 
 class ForecastAdapter : ListAdapter<ForecastInfo, ForecastAdapter.ForecastViewHolder>(
-    DiffCallBack()
+    DiffCallBack(),
 ) {
 
     private class DiffCallBack : DiffUtil.ItemCallback<ForecastInfo>() {
@@ -38,8 +38,6 @@ class ForecastAdapter : ListAdapter<ForecastInfo, ForecastAdapter.ForecastViewHo
             val context = holder.itemView.context
             val dateTimeFormatted = toDateFormatted(result.timestamp)
             val iconToShow = result.weatherDetails[0].icon.showWeatherIcon()
-
-            timber.log.Timber.i("PAOK the date is ${result.timestamp} and ${dateTimeFormatted} ")
 
             holder.dateTime.text = dateTimeFormatted
             Glide.with(context).load(iconToShow).into(holder.weatherIcon)
