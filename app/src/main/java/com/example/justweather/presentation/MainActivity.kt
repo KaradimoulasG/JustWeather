@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.justweather.R
 import com.example.justweather.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -32,7 +33,10 @@ class MainActivity : AppCompatActivity() {
     private fun setUpUi() {
         NavigationUI.setupWithNavController(binding.bottomNavigationView, findNavController(R.id.nav_host))
 
-        binding.fab.setOnClickListener { viewModel.saveFavouriteCity() }
+        binding.fab.setOnClickListener {
+            viewModel.saveFavouriteCity()
+            Snackbar.make(binding.root, "Saved favourite city", Snackbar.LENGTH_SHORT).show()
+        }
 
         binding.bottomNavigationView.apply {
             background = null

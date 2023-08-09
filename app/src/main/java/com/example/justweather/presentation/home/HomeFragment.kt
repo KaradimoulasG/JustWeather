@@ -35,7 +35,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setUpViewModel()
         setUpUi()
-//        populateMainViews(viewModel.state.value)
     }
 
     private fun setUpViewModel() {
@@ -45,13 +44,14 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
             viewModel.state.onEach {
                 when (it.eventName) {
                     WeatherViewModelEvent.Loading -> Timber.i("we wait")
-                    WeatherViewModelEvent.GotCity -> populateMainViews(viewModel.state.value)
+                    WeatherViewModelEvent.GotCity -> populateMainViews(viewModel.state.value.apiResponse)
                     WeatherViewModelEvent.GotForecast -> populateForecastView(viewModel.state.value)
                     WeatherViewModelEvent.GotPollution -> {
                         binding.weatherRefresher.isRefreshing = false
                         populateAirPollutionView(viewModel.state.value)
                     }
-                    WeatherViewModelEvent.CachedCity -> offlineMode(viewModel.state.value.apiResponse)
+
+                    WeatherViewModelEvent.CachedCity -> populateMainViews(viewModel.state.value.cachedCity)
                     WeatherViewModelEvent.EmptyFavouriteCity -> Timber.i("did not work")
                     else -> {}
                 }
@@ -62,7 +62,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
     private fun setUpUi() {
         binding.apply {
             forecastRv.apply {
-                layoutManager = LinearLayoutManager(activity?.applicationContext, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = LinearLayoutManager(
+                    activity?.applicationContext,
+                    LinearLayoutManager.HORIZONTAL,
+                    false,
+                )
                 adapter = forecastAdapter
             }
 
@@ -73,41 +77,30 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun populateMainViews(stateValue: WeatherState) {
-        val date = stateValue.dateTime?.toDate()
-        val iconToShow = stateValue.weatherIcon.showWeatherIcon()
+    private fun populateMainViews(cityInfo: CityInfo?) {
+        var date = ""
+        val iconToShow = cityInfo?.weatherDetails?.get(0)?.icon?.showWeatherIcon()
 
-        binding.apply {
-            cityNameTv.text = getString(R.string.city_name_title, stateValue.cityName)
-            dateTimeTv.text = getString(R.string.date_time_title, date)
-            tempTv.text = getString(R.string.local_temp, stateValue.currentTemp.roundToInt())
-            realFeelTv.text = getString(R.string.real_feel, stateValue.realFeel)
-            Glide.with(this@HomeFragment).load(iconToShow).into(weatherIv)
-
-            threePieceComponent.setUpComponent(
-                stateValue.windSpeed!!.roundToInt(),
-                stateValue.humidity!!,
-                stateValue.pressure!!,
+        if (cityInfo == viewModel.state.value.apiResponse) {
+            Timber.i("PAOK internet with ${viewModel.state.value.dateTime}")
+            date = viewModel.state.value.dateTime!!.toDate()
+            binding.threePieceComponent.setUpComponent(
+                cityInfo?.windDetails?.speed!!.roundToInt(),
+                cityInfo?.mainDetails?.humidity!!,
+                cityInfo?.mainDetails?.pressure!!,
             )
+        } else {
+            Timber.i("PAOK no internet")
+            date = cityInfo?.timestamp!!.toDate()
         }
-    }
-
-    private fun offlineMode(apiResponse: CityInfo?) {
-        val date = apiResponse?.timestamp?.toDate()
-        val iconToShow = apiResponse?.weatherDetails?.get(0)?.icon?.showWeatherIcon()
 
         binding.apply {
-            cityNameTv.text = getString(R.string.city_name_title, apiResponse?.cityName)
-            dateTimeTv.text = getString(R.string.date_time_title, date)
-            tempTv.text = getString(R.string.local_temp, apiResponse?.mainDetails?.temp?.roundToInt())
-            realFeelTv.text = getString(R.string.real_feel, apiResponse?.mainDetails?.feels_like)
+            cityNameTv.text = getString(R.string.city_name_title, cityInfo?.cityName)
+            dateTimeTv.text = date
+            tempTv.text =
+                getString(R.string.local_temp, cityInfo?.mainDetails?.temp?.roundToInt())
+            realFeelTv.text = getString(R.string.real_feel, cityInfo?.mainDetails?.feels_like)
             Glide.with(this@HomeFragment).load(iconToShow).into(weatherIv)
-
-            threePieceComponent.setUpComponent(
-                apiResponse?.windDetails?.speed!!.roundToInt(),
-                apiResponse?.mainDetails?.humidity!!,
-                apiResponse?.mainDetails?.pressure!!,
-            )
         }
     }
 

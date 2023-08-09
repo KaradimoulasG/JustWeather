@@ -43,11 +43,13 @@ class WeatherViewModel(
 
             response.onSuccess { apiResponse ->
                 val model = apiResponse.toCityInfo()
+                cityRepo.saveFavouriteCity(model)
                 timber.log.Timber.i("Favourite City here with ${cityRepo.getFavouriteCity()}")
                 _state.update { state ->
                     state.copy(
                         eventName = WeatherViewModelEvent.GotCity,
                         apiResponse = model,
+                        cachedCity = model,
                         cityName = city,
                         dateTime = model.timestamp,
                         currentTemp = model.mainDetails.temp,
@@ -142,8 +144,8 @@ class WeatherViewModel(
             val dao = cityRepo.getFavouriteCity()
             _state.update { state ->
                 state.copy(
-                    eventName = if (dao.cityName.isNullOrEmpty()) WeatherViewModelEvent.OfflineMode else WeatherViewModelEvent.CachedCity,
-                    apiResponse = dao,
+                    eventName = if (dao.cityName.isEmpty()) WeatherViewModelEvent.OfflineMode else WeatherViewModelEvent.CachedCity,
+                    cachedCity = dao,
                 )
             }
 
@@ -165,6 +167,7 @@ class WeatherViewModel(
 data class WeatherState(
     val eventName: WeatherViewModelEvent = WeatherViewModelEvent.None,
     val apiResponse: CityInfo? = null,
+    val cachedCity: CityInfo? = null,
     val cityName: String = "",
     val searchedCity: String = "",
     val dateTime: Int? = null,
