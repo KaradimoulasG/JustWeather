@@ -47,7 +47,7 @@ class WeatherViewModel(
                 timber.log.Timber.i("Favourite City here with ${cityRepo.getFavouriteCity()}")
                 _state.update { state ->
                     state.copy(
-                        eventName = WeatherViewModelEvent.GotCity,
+//                        eventName = WeatherViewModelEvent.GotCity,
                         apiResponse = model,
                         cachedCity = model,
                         cityName = city,
@@ -58,7 +58,6 @@ class WeatherViewModel(
                         windSpeed = model.windDetails.speed,
                         pressure = model.mainDetails.pressure,
                         humidity = model.mainDetails.humidity,
-                        searchedCity = "",
                     )
                 }
                 getForecast(model.coordination.lat, model.coordination.lon)
@@ -79,7 +78,7 @@ class WeatherViewModel(
                 val forecastList = result.list.toForecastInfo()
                 _state.update { state ->
                     state.copy(
-                        eventName = WeatherViewModelEvent.GotForecast,
+//                        eventName = WeatherViewModelEvent.GotForecast,
                         forecastList = forecastList,
                     )
                 }
@@ -108,7 +107,8 @@ class WeatherViewModel(
                 val result = it.toAirPollution()
                 _state.update { state ->
                     state.copy(
-                        eventName = WeatherViewModelEvent.GotPollution,
+                        eventName = if (_state.value.searchedCity.isNullOrEmpty()) WeatherViewModelEvent.GotCity else WeatherViewModelEvent.GotSearchedCity,
+//                        searchedCity = "",
                         airPollutionDetails = result.detailsList,
                     )
                 }
@@ -195,4 +195,5 @@ sealed class WeatherViewModelEvent() {
     object GotCity : WeatherViewModelEvent()
     object GotForecast : WeatherViewModelEvent()
     object GotPollution : WeatherViewModelEvent()
+    object GotSearchedCity : WeatherViewModelEvent()
 }

@@ -1,10 +1,14 @@
 package com.example.justweather.common.components
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.LifecycleCoroutineScope
 import com.example.justweather.common.extensions.hide
 import com.example.justweather.common.extensions.show
 import com.example.justweather.databinding.SearchBarComponentBinding
@@ -46,19 +50,16 @@ class SearchBarComponent @JvmOverloads constructor(
             }
         }
     }
-//    fun textChangesListener(timeOut: Long, lifecycleScope: LifecycleCoroutineScope, action: (CharSequence) -> Unit) {
-//        binding.searchEt.textChanges().filterNot {
-//            hideIcons()
-//            it.isNullOrBlank()
-//        }.debounce(timeOut)
-//            .onEach { char ->
-//                char?.let {
-//                    action(it)
-//                    showIcons()
-//                }
-//            }
-//            .launchIn(lifecycleScope)
-//    }
+
+    fun textChangesListener() {
+        binding.searchEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                showIcons()
+            }
+        })
+    }
 
     fun eventKeyListener(action: (String) -> Unit) {
         binding.searchEt.apply {

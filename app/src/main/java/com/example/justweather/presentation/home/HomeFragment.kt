@@ -38,15 +38,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
     }
 
     private fun setUpViewModel() {
-        viewModel.getCityInfo(city = "Thessaloniki")
-
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {
+                    WeatherViewModelEvent.None -> viewModel.getCityInfo(city = "Thessaloniki")
                     WeatherViewModelEvent.Loading -> Timber.i("we wait")
-                    WeatherViewModelEvent.GotCity -> populateMainViews(viewModel.state.value.apiResponse)
-                    WeatherViewModelEvent.GotForecast -> populateForecastView(viewModel.state.value)
-                    WeatherViewModelEvent.GotPollution -> {
+                    WeatherViewModelEvent.GotCity,
+                    WeatherViewModelEvent.GotSearchedCity -> {
+                        populateMainViews(viewModel.state.value.apiResponse)
+                        populateForecastView(viewModel.state.value)
                         binding.weatherRefresher.isRefreshing = false
                         populateAirPollutionView(viewModel.state.value)
                     }
