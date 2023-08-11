@@ -137,8 +137,9 @@
                         android:id="@+id/five_day_forecast_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:orientation="vertical">
-
 
                         <LinearLayout
                             android:id="@+id/five_day_forecast_title"

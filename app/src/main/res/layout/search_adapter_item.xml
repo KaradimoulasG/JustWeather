@@ -3,6 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:background="@drawable/custom_border"
+    android:clickable="true"
+    android:elevation="8dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_marginBottom="4dp"
     xmlns:tools="http://schemas.android.com/tools">
 
 
@@ -20,10 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textSize="24sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         tools:text="somenthing" />
-
 
     <ImageView
         android:id="@+id/action_btn_iv"
@@ -31,7 +35,7 @@
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_margin="12dp"
-        tools:src="@drawable/baseline_navigate_next_24" />
+        android:src="@drawable/baseline_navigate_next_24" />
 
 
 </RelativeLayout>
