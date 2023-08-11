@@ -14,4 +14,5 @@ interface ICityRepo {
 
     suspend fun saveFavouriteCity(city: CityInfo)
     suspend fun getFavouriteCity(): CityInfo
+    suspend fun getAllSavedCities(): List<CityInfo>
 }

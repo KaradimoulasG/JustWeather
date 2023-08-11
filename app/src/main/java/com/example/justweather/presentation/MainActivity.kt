@@ -52,6 +52,10 @@ class MainActivity : AppCompatActivity() {
                         findNavController(R.id.nav_host).navigate(R.id.searchFragment)
                         true
                     }
+                    getString(R.string.bottom_nav_option_favourites) -> {
+                        findNavController(R.id.nav_host).navigate(R.id.favoriteCitiesFragment)
+                        true
+                    }
                     else -> false
                 }
             }

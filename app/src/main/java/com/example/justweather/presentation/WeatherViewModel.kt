@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class WeatherViewModel(
     private val cityRepo: ICityRepo,
@@ -35,16 +34,18 @@ class WeatherViewModel(
     fun getCityInfo(city: String) {
         viewModelScope.launch {
             _state.update { state ->
-                state.copy(eventName = WeatherViewModelEvent.Loading)
+                state.copy(
+                    eventName = WeatherViewModelEvent.Loading,
+                    cachedCityName = cityRepo.getFavouriteCity().cityName,
+                )
             }
-
-            val cityToSearch = if (_state.value.searchedCity.isNullOrEmpty()) city else _state.value.searchedCity
+            val cityToSearch = if (_state.value.searchedCity.isNullOrEmpty()) _state.value.cachedCityName else _state.value.searchedCity
             val response = cityRepo.getCityInfo(cityToSearch)
 
             response.onSuccess { apiResponse ->
                 val model = apiResponse.toCityInfo()
                 cityRepo.saveFavouriteCity(model)
-                timber.log.Timber.i("Favourite City here with ${cityRepo.getFavouriteCity()}")
+                timber.log.Timber.i("Favourite City here with ${_state.value.cachedCityName}")
                 _state.update { state ->
                     state.copy(
 //                        eventName = WeatherViewModelEvent.GotCity,
@@ -62,9 +63,9 @@ class WeatherViewModel(
                 }
                 getForecast(model.coordination.lat, model.coordination.lon)
             }.onException {
-                handleOfflineCaching()
+                handleOfflineMode()
             }.onError { _, _ ->
-                handleOfflineCaching()
+                handleOfflineMode()
             }
         }
     }
@@ -139,7 +140,7 @@ class WeatherViewModel(
         }
     }
 
-    private fun handleOfflineCaching() {
+    private fun handleOfflineMode() {
         viewModelScope.launch {
             val dao = cityRepo.getFavouriteCity()
             _state.update { state ->
@@ -162,12 +163,25 @@ class WeatherViewModel(
 //            }
         }
     }
+
+    fun getSavedCities() {
+        viewModelScope.launch {
+            val savedCities = cityRepo.getAllSavedCities()
+            _state.update { state ->
+                state.copy(
+                    eventName = WeatherViewModelEvent.SavedCities,
+                    savedCitiesList = savedCities,
+                )
+            }
+        }
+    }
 }
 
 data class WeatherState(
     val eventName: WeatherViewModelEvent = WeatherViewModelEvent.None,
     val apiResponse: CityInfo? = null,
     val cachedCity: CityInfo? = null,
+    val cachedCityName: String = "",
     val cityName: String = "",
     val searchedCity: String = "",
     val dateTime: Int? = null,
@@ -180,6 +194,7 @@ data class WeatherState(
     val forecastList: List<ForecastInfo> = listOf(),
     val airPollutionDetails: List<AirPollutionDetailsDto> = listOf(),
     val message: String = "",
+    val savedCitiesList: List<CityInfo> = listOf(),
 )
 
 sealed class WeatherViewModelEvent() {
@@ -191,6 +206,7 @@ sealed class WeatherViewModelEvent() {
     object Exception : WeatherViewModelEvent()
     object EmptyFavouriteCity : WeatherViewModelEvent()
     object SavedFavouriteCity : WeatherViewModelEvent()
+    object SavedCities : WeatherViewModelEvent()
     object CachedCity : WeatherViewModelEvent()
     object GotCity : WeatherViewModelEvent()
     object GotForecast : WeatherViewModelEvent()

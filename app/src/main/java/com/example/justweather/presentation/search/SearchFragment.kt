@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.example.justweather.R
 import com.example.justweather.common.extensions.hide
@@ -24,7 +23,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
         get() = FragmentSearchBinding::inflate
 
     private val viewModel: WeatherViewModel by sharedViewModel()
-    private val searchAdapter = SearchAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,20 +32,11 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 
     private fun setUpUi() {
         binding.apply {
-            resultsRv.apply {
-                layoutManager = LinearLayoutManager(
-                    activity?.applicationContext,
-                    LinearLayoutManager.VERTICAL,
-                    false,
-                )
-                adapter = searchAdapter
-
-                searchComponent.apply {
-                    cleanSearch { resultsTv.hide() }
-                    eventKeyListener { viewModel.setCityToSearch(getSearchText()) }
-                    search { viewModel.setCityToSearch(getSearchText()) }
-                    textChangesListener()
-                }
+            searchComponent.apply {
+                cleanSearch { resultsTv.hide() }
+                eventKeyListener { viewModel.setCityToSearch(getSearchText()) }
+                search { viewModel.setCityToSearch(getSearchText()) }
+                textChangesListener()
             }
         }
     }
@@ -56,8 +45,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {
-                    WeatherViewModelEvent.Loading -> timber.log.Timber.i("PAOK loading")
-                    WeatherViewModelEvent.Fail -> timber.log.Timber.i("PAOK error")
+                    WeatherViewModelEvent.Loading -> timber.log.Timber.i("Loading")
+                    WeatherViewModelEvent.Fail -> timber.log.Timber.i("Error")
                     WeatherViewModelEvent.GotSearchedCity -> findNavController().navigate(R.id.action_searchFragment_to_homeFragment)
                     else -> {}
                 }

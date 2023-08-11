@@ -27,4 +27,7 @@ class CityRepoImpl(
 
     override suspend fun getFavouriteCity() =
         cityDao.getFavouriteCity()
+
+    override suspend fun getAllSavedCities() =
+        cityDao.getAllSavedCities()
 }

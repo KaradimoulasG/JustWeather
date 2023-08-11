@@ -41,7 +41,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {
-                    WeatherViewModelEvent.None -> viewModel.getCityInfo(city = "Thessaloniki")
+                    WeatherViewModelEvent.None -> viewModel.getCityInfo(city = "Athens")
                     WeatherViewModelEvent.Loading -> Timber.i("we wait")
                     WeatherViewModelEvent.GotCity,
                     WeatherViewModelEvent.GotSearchedCity -> {
@@ -82,7 +82,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         val iconToShow = cityInfo?.weatherDetails?.get(0)?.icon?.showWeatherIcon()
 
         if (cityInfo == viewModel.state.value.apiResponse) {
-            Timber.i("PAOK internet with ${viewModel.state.value.dateTime}")
+            Timber.i("internet with ${viewModel.state.value.dateTime}")
             date = viewModel.state.value.dateTime!!.toDate()
             binding.threePieceComponent.setUpComponent(
                 cityInfo?.windDetails?.speed!!.roundToInt(),
@@ -90,7 +90,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 cityInfo?.mainDetails?.pressure!!,
             )
         } else {
-            Timber.i("PAOK no internet")
+            Timber.i("no internet")
             date = cityInfo?.timestamp!!.toDate()
         }
 
