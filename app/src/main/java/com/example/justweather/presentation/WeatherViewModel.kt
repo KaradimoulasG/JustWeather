@@ -149,18 +149,6 @@ class WeatherViewModel(
                     cachedCity = dao,
                 )
             }
-
-//            when (dao.cityName) {
-//                null -> _state.update { it.copy(eventName = WeatherViewModelEvent.OfflineMode) }
-//                else -> {
-//                    _state.update { state ->
-//                        state.copy(
-//                            eventName = WeatherViewModelEvent.CachedCity,
-//                            apiResponse = dao,
-//                        )
-//                    }
-//                }
-//            }
         }
     }
 

@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.justweather.R
+import com.example.justweather.common.extensions.hide
+import com.example.justweather.common.extensions.show
 import com.example.justweather.common.extensions.showWeatherIcon
 import com.example.justweather.common.extensions.toDate
 import com.example.justweather.databinding.FragmentHomeBinding
@@ -44,14 +46,16 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                     WeatherViewModelEvent.None -> viewModel.getCityInfo(city = "Athens")
                     WeatherViewModelEvent.Loading -> Timber.i("we wait")
                     WeatherViewModelEvent.GotCity,
-                    WeatherViewModelEvent.GotSearchedCity -> {
+                    WeatherViewModelEvent.GotSearchedCity,
+                    -> {
                         populateMainViews(viewModel.state.value.apiResponse)
                         populateForecastView(viewModel.state.value)
                         binding.weatherRefresher.isRefreshing = false
                         populateAirPollutionView(viewModel.state.value)
                     }
 
-                    WeatherViewModelEvent.CachedCity -> populateMainViews(viewModel.state.value.cachedCity)
+                    WeatherViewModelEvent.CachedCity -> populateMainViews(viewModel.state.value.cachedCity, offlineMode = true)
+//                    WeatherViewModelEvent.OfflineMode -> populateMainViews(viewModel.state.value.cachedCity, offlineMode = true)
                     WeatherViewModelEvent.EmptyFavouriteCity -> Timber.i("did not work")
                     else -> {}
                 }
@@ -77,30 +81,39 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun populateMainViews(cityInfo: CityInfo?) {
-        var date = ""
+    private fun populateMainViews(cityInfo: CityInfo?, offlineMode: Boolean = false) {
         val iconToShow = cityInfo?.weatherDetails?.get(0)?.icon?.showWeatherIcon()
+        val date = when (cityInfo) {
+            viewModel.state.value.apiResponse -> viewModel.state.value.dateTime!!.toDate()
+            else -> cityInfo?.timestamp!!.toDate()
+        }
 
-        if (cityInfo == viewModel.state.value.apiResponse) {
-            Timber.i("internet with ${viewModel.state.value.dateTime}")
-            date = viewModel.state.value.dateTime!!.toDate()
-            binding.threePieceComponent.setUpComponent(
+        binding.apply {
+            threePieceComponent.setUpComponent(
                 cityInfo?.windDetails?.speed!!.roundToInt(),
                 cityInfo?.mainDetails?.humidity!!,
                 cityInfo?.mainDetails?.pressure!!,
             )
-        } else {
-            Timber.i("no internet")
-            date = cityInfo?.timestamp!!.toDate()
-        }
 
-        binding.apply {
             cityNameTv.text = getString(R.string.city_name_title, cityInfo?.cityName)
-            dateTimeTv.text = date
+            dateTimeTv.text = getString(R.string.date_time_title, date)
             tempTv.text =
                 getString(R.string.local_temp, cityInfo?.mainDetails?.temp?.roundToInt())
             realFeelTv.text = getString(R.string.real_feel, cityInfo?.mainDetails?.feels_like)
             Glide.with(this@HomeFragment).load(iconToShow).into(weatherIv)
+
+            when (offlineMode) {
+                true -> {
+                    fiveDayForecastNsv.hide()
+                    airPollutionLayout.hide()
+                    offlineModeTv.show()
+                }
+                else -> {
+                    fiveDayForecastNsv.show()
+                    airPollutionLayout.show()
+                    offlineModeTv.hide()
+                }
+            }
         }
     }
 
