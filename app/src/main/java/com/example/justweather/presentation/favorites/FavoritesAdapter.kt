@@ -15,6 +15,8 @@ import com.example.justweather.domain.model.CityInfo
 
 class FavoritesAdapter : ListAdapter<CityInfo, FavoritesAdapter.FavoritesViewHolder>(DiffCallBack()) {
 
+    var onItemClick: ((String) -> Unit)? = null
+
     private class DiffCallBack : DiffUtil.ItemCallback<CityInfo>() {
         override fun areItemsTheSame(oldItem: CityInfo, newItem: CityInfo) = oldItem.timestamp == newItem.timestamp
         override fun areContentsTheSame(oldItem: CityInfo, newItem: CityInfo) = oldItem == newItem
@@ -27,7 +29,6 @@ class FavoritesAdapter : ListAdapter<CityInfo, FavoritesAdapter.FavoritesViewHol
     inner class FavoritesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var weatherIcon: ImageView = itemView.findViewById(R.id.weather_iv)
         private var cityName: TextView = itemView.findViewById(R.id.city_name_tv)
-        private var nextBtn: ImageView = itemView.findViewById(R.id.action_btn_iv)
 
         fun bind(holder: FavoritesViewHolder, pos: Int) {
             val result = currentList[pos]
@@ -36,6 +37,10 @@ class FavoritesAdapter : ListAdapter<CityInfo, FavoritesAdapter.FavoritesViewHol
 
             Glide.with(context).load(iconToShow).into(holder.weatherIcon)
             holder.cityName.text = result.cityName
+
+            holder.itemView.setOnClickListener {
+                onItemClick?.invoke(result.cityName)
+            }
         }
     }
 }

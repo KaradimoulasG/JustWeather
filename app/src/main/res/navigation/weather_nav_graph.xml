@@ -24,5 +24,9 @@
         android:id="@+id/favoriteCitiesFragment"
         android:name="com.example.justweather.presentation.favorites.FavoriteCities"
         android:label="fragment_favorite_cities"
-        tools:layout="@layout/fragment_favorite_cities" />
+        tools:layout="@layout/fragment_favorite_cities" >
+        <action
+            android:id="@+id/action_favoriteCitiesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
