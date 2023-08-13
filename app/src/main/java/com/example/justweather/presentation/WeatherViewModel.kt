@@ -33,23 +33,29 @@ class WeatherViewModel(
 
     fun getCityInfo(city: String) {
         viewModelScope.launch {
+            val cachedCity = cityRepo.getFavouriteCity()
             _state.update { state ->
                 state.copy(
                     eventName = WeatherViewModelEvent.Loading,
-                    cachedCityName = cityRepo.getFavouriteCity().cityName,
+                    cachedCityName = cachedCity.cityName,
                 )
             }
-            val cityToSearch = if (_state.value.searchedCity.isNullOrEmpty()) _state.value.cachedCityName else _state.value.searchedCity
+            val cityToSearch =
+                _state.value.searchedCity.ifEmpty {
+                    when (_state.value.cachedCityName) {
+                        city -> _state.value.cachedCityName
+                        else -> city
+                    }
+                }
             val response = cityRepo.getCityInfo(cityToSearch)
 
             response.onSuccess { apiResponse ->
                 val model = apiResponse.toCityInfo()
-                cityRepo.saveFavouriteCity(model)
-                timber.log.Timber.i("Favourite City here with ${_state.value.cachedCityName}")
                 _state.update { state ->
                     state.copy(
-//                        eventName = WeatherViewModelEvent.GotCity,
+                        eventName = if (cityRepo.checkIfCityIsSaved(model.cityName)) WeatherViewModelEvent.SavedFavouriteCity else WeatherViewModelEvent.NotSavedFavouriteCity,
                         apiResponse = model,
+                        savedCity = cityRepo.checkIfCityIsSaved(model.cityName),
                         cachedCity = model,
                         cityName = city,
                         dateTime = model.timestamp,
@@ -78,22 +84,22 @@ class WeatherViewModel(
                 val result = it.toForecast()
                 val forecastList = result.list.toForecastInfo()
                 _state.update { state ->
-                    state.copy(
-//                        eventName = WeatherViewModelEvent.GotForecast,
-                        forecastList = forecastList,
-                    )
+                    state.copy(forecastList = forecastList)
                 }
                 getPollution(lat, lon)
             }.onException {
-                _state.update {
-                    it.copy(
-                        eventName = WeatherViewModelEvent.Fail,
+                _state.update { state ->
+                    state.copy(
+                        eventName = WeatherViewModelEvent.NetworkException,
+                        errorMessage = it.message,
                     )
                 }
-            }.onError { _, _ ->
+            }.onError { code, message ->
                 _state.update {
                     it.copy(
-                        eventName = WeatherViewModelEvent.Loading,
+                        eventName = WeatherViewModelEvent.ApiError,
+                        errorMessage = message,
+                        errorCode = code,
                     )
                 }
             }
@@ -109,28 +115,30 @@ class WeatherViewModel(
                 _state.update { state ->
                     state.copy(
                         eventName = if (_state.value.searchedCity.isNullOrEmpty()) WeatherViewModelEvent.GotCity else WeatherViewModelEvent.GotSearchedCity,
-//                        searchedCity = "",
                         airPollutionDetails = result.detailsList,
                     )
                 }
             }.onException {
-                _state.update {
-                    it.copy(
-                        eventName = WeatherViewModelEvent.Fail,
+                _state.update { state ->
+                    state.copy(
+                        eventName = WeatherViewModelEvent.NetworkException,
+                        errorMessage = it.message,
                     )
                 }
-            }.onError { _, _ ->
+            }.onError { code, message ->
                 _state.update {
                     it.copy(
-                        eventName = WeatherViewModelEvent.Loading,
+                        eventName = WeatherViewModelEvent.ApiError,
+                        errorMessage = message,
+                        errorCode = code,
                     )
                 }
             }
         }
     }
 
-    fun setCityToSearch(cityName: String) {
-        _state.update { it.copy(searchedCity = cityName) }
+    fun setCityToSearch(cityName: String, cameFromSavedCities: Boolean = false) {
+        _state.update { it.copy(searchedCity = if (cameFromSavedCities) "" else cityName) }
         getCityInfo(cityName)
     }
 
@@ -168,6 +176,7 @@ class WeatherViewModel(
 data class WeatherState(
     val eventName: WeatherViewModelEvent = WeatherViewModelEvent.None,
     val apiResponse: CityInfo? = null,
+    val savedCity: Boolean = false,
     val cachedCity: CityInfo? = null,
     val cachedCityName: String = "",
     val cityName: String = "",
@@ -183,6 +192,9 @@ data class WeatherState(
     val airPollutionDetails: List<AirPollutionDetailsDto> = listOf(),
     val message: String = "",
     val savedCitiesList: List<CityInfo> = listOf(),
+    val errorCode: Int = 0,
+    val errorMessage: String? = "",
+    val cameFromSavedCities: Boolean = false,
 )
 
 sealed class WeatherViewModelEvent() {
@@ -191,9 +203,11 @@ sealed class WeatherViewModelEvent() {
     object Success : WeatherViewModelEvent()
     object Fail : WeatherViewModelEvent()
     object OfflineMode : WeatherViewModelEvent()
-    object Exception : WeatherViewModelEvent()
+    object NetworkException : WeatherViewModelEvent()
+    object ApiError : WeatherViewModelEvent()
     object EmptyFavouriteCity : WeatherViewModelEvent()
     object SavedFavouriteCity : WeatherViewModelEvent()
+    object NotSavedFavouriteCity : WeatherViewModelEvent()
     object SavedCities : WeatherViewModelEvent()
     object CachedCity : WeatherViewModelEvent()
     object GotCity : WeatherViewModelEvent()

@@ -16,4 +16,7 @@ interface CityDao {
 
     @Query("SELECT * FROM CityInfo")
     suspend fun getAllSavedCities(): List<CityInfo>
+
+    @Query("SELECT EXISTS (SELECT 1 FROM CityInfo WHERE cityName = :name)")
+    suspend fun isCitySaved(name: String): Boolean
 }

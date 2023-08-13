@@ -9,5 +9,3 @@ S
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 y
 Iapp/src/main/java/com/example/justweather/data/persistence/AppDatabase.kt,2\7\2792e9182b0afb575a954c36f1fc3ec461536452
-x
-Happ/src/main/java/com/example/justweather/data/repositories/ICityRepo.kt,4\e\4e97b4ab1122a5cacfa34d41efdd68bb503c8541

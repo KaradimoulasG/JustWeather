@@ -30,4 +30,7 @@ class CityRepoImpl(
 
     override suspend fun getAllSavedCities() =
         cityDao.getAllSavedCities()
+
+    override suspend fun checkIfCityIsSaved(name: String) =
+        cityDao.isCitySaved(name)
 }

@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         app:rippleColor="@color/black"
-        android:src="@drawable/ic_baseline_add_24"
+        android:src="@drawable/ic_baseline_favorite_24"
         app:layout_anchorGravity="end"
         app:layout_anchor="@id/bottomAppBar" />
 

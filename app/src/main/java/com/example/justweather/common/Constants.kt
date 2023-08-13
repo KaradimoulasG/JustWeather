@@ -33,6 +33,5 @@ enum class WeatherDescription(val iconId: String) {
     SnowDay("13d"),
     SnowNight("13n"),
     MistDay("50d"),
-    MistNight("50n")
+    MistNight("50n"),
 }
-

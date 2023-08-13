@@ -53,10 +53,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                         binding.weatherRefresher.isRefreshing = false
                         populateAirPollutionView(viewModel.state.value)
                     }
-
                     WeatherViewModelEvent.CachedCity -> populateMainViews(viewModel.state.value.cachedCity, offlineMode = true)
-//                    WeatherViewModelEvent.OfflineMode -> populateMainViews(viewModel.state.value.cachedCity, offlineMode = true)
                     WeatherViewModelEvent.EmptyFavouriteCity -> Timber.i("did not work")
+                    WeatherViewModelEvent.NetworkException -> Timber.i("network exception here")
                     else -> {}
                 }
             }.launchIn(this)
