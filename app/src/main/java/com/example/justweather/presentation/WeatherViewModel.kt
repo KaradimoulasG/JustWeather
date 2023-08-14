@@ -37,7 +37,7 @@ class WeatherViewModel(
             _state.update { state ->
                 state.copy(
                     eventName = WeatherViewModelEvent.Loading,
-                    cachedCityName = cachedCity.cityName,
+//                    cachedCityName = if (!cachedCity.cityName.isNullOrEmpty()) cachedCity.cityName else "",
                 )
             }
             val cityToSearch =

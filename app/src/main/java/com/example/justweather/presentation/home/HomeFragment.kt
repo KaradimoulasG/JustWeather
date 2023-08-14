@@ -3,11 +3,13 @@ package com.example.justweather.presentation.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.justweather.R
+import com.example.justweather.common.components.AnimatedMessageBox
 import com.example.justweather.common.extensions.hide
 import com.example.justweather.common.extensions.show
 import com.example.justweather.common.extensions.showWeatherIcon
@@ -77,6 +79,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 isRefreshing = false
                 setOnRefreshListener { viewModel.getCityInfo("Thessaloniki") }
             }
+
+            topToast.apply {
+                hide()
+                setContent { AnimatedMessageBox(text = "This is a test", color = Color.Red) }
+            }
         }
     }
 
@@ -93,6 +100,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 cityInfo?.mainDetails?.humidity!!,
                 cityInfo?.mainDetails?.pressure!!,
             )
+
+            topToast.show()
 
             cityNameTv.text = getString(R.string.city_name_title, cityInfo?.cityName)
             dateTimeTv.text = getString(R.string.date_time_title, date)

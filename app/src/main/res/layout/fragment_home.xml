@@ -133,6 +133,11 @@
                     android:textColor="@color/white"
                     android:layout_margin="12dp" />
 
+                <androidx.compose.ui.platform.ComposeView
+                    android:id="@+id/top_toast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
                 <androidx.core.widget.NestedScrollView
                     android:id="@+id/five_day_forecast_nsv"
                     android:layout_width="match_parent"
