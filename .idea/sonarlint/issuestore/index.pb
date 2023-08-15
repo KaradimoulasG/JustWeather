@@ -7,8 +7,6 @@ y
 Iapp/src/main/java/com/example/justweather/data/persistence/AppDatabase.kt,2\7\2792e9182b0afb575a954c36f1fc3ec461536452
 u
 Eapp/src/main/java/com/example/justweather/data/persistence/CityDao.kt,c\6\c6837f3362cc3f8c89c979f4b054be5dfcff4b86
-Ç
-Rapp/src/main/java/com/example/justweather/presentation/favorites/FavoriteCities.kt,b\6\b62511bf72913faac472a31953334acd0dd0d1e8
 \
 ,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
 Å
@@ -35,3 +33,11 @@ G.idea/sonarlint/issuestore/9/c/9cb1102b5ed1dffb577a0def3643794404a9e9df,5\6\56
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+Ä
+Papp/src/main/java/com/example/justweather/common/components/TopToastComponent.kt,d\f\df1bd899522b20c72aa06f8ac557d7e7cd3a832d
+Ñ
+Tapp/src/main/java/com/example/justweather/presentation/favorites/FavoritesAdapter.kt,0\2\02b547c7104d4385d0f034bc0470a5623ca173ef
+
+Oapp/src/main/java/com/example/justweather/presentation/search/SearchFragment.kt,e\8\e85fec4ad20043989e5370c789f9248e6717dcfd

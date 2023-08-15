@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.justweather.R
-import com.example.justweather.common.components.AnimatedMessageBox
 import com.example.justweather.common.extensions.hide
 import com.example.justweather.common.extensions.show
 import com.example.justweather.common.extensions.showWeatherIcon
@@ -82,7 +81,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
 
             topToast.apply {
                 hide()
-                setContent { AnimatedMessageBox(text = "This is a test", color = Color.Red) }
+//                setContent { AnimatedMessageBox(text = "This is a test", color = Color.Red) }
             }
         }
     }

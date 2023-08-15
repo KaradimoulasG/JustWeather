@@ -7,7 +7,7 @@ Minimum SDK level 26
 - JetPack
   - Lifecycle - dispose observing data when lifecycle state changes.
   - ViewModel - UI related data holder, lifecycle aware.
-  - Room Persistence - construct database. (this is a TODO task)
+  - Room Persistence - construct local database for offline caching
 
 - Architecture
   - MVVM Architecture (View - DataBinding - ViewModel - Model)
