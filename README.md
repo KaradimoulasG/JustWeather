@@ -4,6 +4,7 @@ ReadMe will be updated once the project is somewhat finished and will showcase t
 Minimum SDK level 26
 
 - 100% Kotlin based + Coroutines + Flow for asynchronous.
+- XML based layout and Navigation + Jetpack Compose components
 - JetPack
   - Lifecycle - dispose observing data when lifecycle state changes.
   - ViewModel - UI related data holder, lifecycle aware.
