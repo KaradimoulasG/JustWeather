@@ -150,11 +150,11 @@ class WeatherViewModel(
 
     private fun handleOfflineMode() {
         viewModelScope.launch {
-            val dao = cityRepo.getFavouriteCity()
+            val dao = cityRepo.getAllSavedCities()
             _state.update { state ->
                 state.copy(
-                    eventName = if (dao.cityName.isEmpty()) WeatherViewModelEvent.OfflineMode else WeatherViewModelEvent.CachedCity,
-                    cachedCity = dao,
+                    eventName = if (dao.isEmpty()) WeatherViewModelEvent.OfflineMode else WeatherViewModelEvent.CachedCity,
+                    cachedCity = if (dao.isEmpty()) null else dao[0],
                 )
             }
         }

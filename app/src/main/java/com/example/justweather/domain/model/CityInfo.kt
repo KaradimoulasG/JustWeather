@@ -1,5 +1,6 @@
 package com.example.justweather.domain.model
 
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.justweather.data.dto.cityInfo.CityInfoDto
@@ -20,6 +21,7 @@ data class CityInfo(
     val id: Int,
     val mainDetails: MainDto,
     @PrimaryKey(autoGenerate = false)
+    @NonNull
     val cityName: String,
     val system: SysDto,
     val visibility: Int,
