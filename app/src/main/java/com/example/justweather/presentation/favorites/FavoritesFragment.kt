@@ -50,7 +50,6 @@ class FavoritesFragment : BindingFragment<FragmentFavoritesBinding>() {
                     else -> {}
                 }
             }.launchIn(this)
-
         }
     }
 }
