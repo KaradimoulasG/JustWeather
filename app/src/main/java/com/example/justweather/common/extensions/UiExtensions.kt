@@ -14,7 +14,6 @@ fun View.hide() {
     visibility = View.GONE
 }
 
-
 inline fun <E : Any, T : Collection<E>> T?.withNullOrEmpty(func: () -> Unit) {
     if (this.isNullOrEmpty()) { func() }
 }

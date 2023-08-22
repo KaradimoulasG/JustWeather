@@ -21,12 +21,12 @@
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favoriteCitiesFragment"
-        android:name="com.example.justweather.presentation.favorites.FavoriteCities"
-        android:label="fragment_favorite_cities"
-        tools:layout="@layout/fragment_favorite_cities" >
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.justweather.presentation.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
         <action
-            android:id="@+id/action_favoriteCitiesFragment_to_homeFragment"
+            android:id="@+id/action_favoritesFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
