@@ -14,6 +14,15 @@ fun View.hide() {
     visibility = View.GONE
 }
 
+
+inline fun <E : Any, T : Collection<E>> T?.withNullOrEmpty(func: () -> Unit) {
+    if (this.isNullOrEmpty()) { func() }
+}
+
+inline fun <E : Any, T : Collection<E>> T?.whenNotNullNorEmpty(func: (T) -> Unit) {
+    if (!this.isNullOrEmpty()) { func(this) }
+}
+
 @SuppressLint("SimpleDateFormat")
 fun Int.toDate(): String {
     val simpleDate = SimpleDateFormat("E, dd/M/yyyy hh:mm:ss")

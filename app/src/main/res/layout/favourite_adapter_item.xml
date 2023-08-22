@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/custom_layout_border">
+
+    <ImageView
+        android:id="@+id/weather_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_sunset"
+        android:layout_margin="12dp" />
+
+    <TextView
+        android:id="@+id/city_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:ellipsize="end"
+        android:maxLength="15"
+        tools:text="Thessaloniki" />
+
+    <ImageView
+        android:id="@+id/arrow_iv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/baseline_navigate_next_24"
+        android:layout_gravity="end|center"
+        android:layout_margin="12dp" />
+
+</FrameLayout>
