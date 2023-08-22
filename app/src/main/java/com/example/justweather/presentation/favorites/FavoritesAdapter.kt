@@ -22,7 +22,7 @@ class FavoritesAdapter : ListAdapter<CityInfo, FavoritesAdapter.FavoritesViewHol
         override fun areContentsTheSame(oldItem: CityInfo, newItem: CityInfo) = oldItem == newItem
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoritesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.search_adapter_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoritesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.favorites_adapter_item, parent, false))
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) = holder.bind(holder, position)
     fun addAll(cities: List<CityInfo>) = submitList(cities)
 

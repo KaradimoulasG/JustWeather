@@ -6,6 +6,8 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
+import com.example.justweather.common.extensions.hide
+import com.example.justweather.common.extensions.show
 import com.example.justweather.common.extensions.whenNotNullNorEmpty
 import com.example.justweather.common.extensions.withNullOrEmpty
 import com.example.justweather.databinding.FragmentFavoritesBinding
@@ -58,10 +60,11 @@ class FavoritesFragment : BindingFragment<FragmentFavoritesBinding>() {
     }
 
     private fun populateViews(savedCitiesList: List<CityInfo>) {
-        savedCitiesList.withNullOrEmpty {
-            // add empty view here
-        }
+        savedCitiesList.withNullOrEmpty { binding.emptyScreenTv.show() }
 
-        savedCitiesList.whenNotNullNorEmpty { favoritesAdapter.addAll(savedCitiesList) }
+        savedCitiesList.whenNotNullNorEmpty {
+            binding.emptyScreenTv.hide()
+            favoritesAdapter.addAll(savedCitiesList)
+        }
     }
 }

@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     getString(R.string.bottom_nav_option_favourites) -> {
-                        findNavController(R.id.nav_host).navigate(R.id.favoriteCitiesFragment)
+                        findNavController(R.id.nav_host).navigate(R.id.favoritesFragment)
                         NavigationUI.onNavDestinationSelected(item, findNavController(R.id.nav_host))
                         true
                     }
