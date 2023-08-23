@@ -13,9 +13,11 @@ import com.example.justweather.R
 import com.example.justweather.common.extensions.showWeatherIcon
 import com.example.justweather.domain.model.CityInfo
 
-class FavoritesAdapter : ListAdapter<CityInfo, FavoritesAdapter.FavoritesViewHolder>(DiffCallBack()) {
-
-    var onItemClick: ((String) -> Unit)? = null
+class FavoritesAdapter(
+    private val layoutInflater: LayoutInflater,
+    private val onCityClick: (String) -> Unit,
+    private val onCityLongClick: (String) -> Unit
+) : ListAdapter<CityInfo, FavoritesAdapter.FavoritesViewHolder>(DiffCallBack()) {
 
     private class DiffCallBack : DiffUtil.ItemCallback<CityInfo>() {
         override fun areItemsTheSame(oldItem: CityInfo, newItem: CityInfo) = oldItem.timestamp == newItem.timestamp
@@ -39,7 +41,12 @@ class FavoritesAdapter : ListAdapter<CityInfo, FavoritesAdapter.FavoritesViewHol
             holder.cityName.text = result.cityName
 
             holder.itemView.setOnClickListener {
-                onItemClick?.invoke(result.cityName)
+                onCityClick.invoke(result.cityName)
+            }
+
+            holder.itemView.setOnLongClickListener {
+                onCityLongClick.invoke(result.cityName)
+                true
             }
         }
     }

@@ -34,9 +34,13 @@ class MainActivity : AppCompatActivity() {
     private fun setUpUi() {
         NavigationUI.setupWithNavController(binding.bottomNavigationView, findNavController(R.id.nav_host))
 
+        binding.topToastComponent.setContent {
+
+        }
+
         binding.fab.setOnClickListener {
             viewModel.saveFavouriteCity()
-            Snackbar.make(binding.root, "Saved favourite city", Snackbar.LENGTH_SHORT).show()
+//            Snackbar.make(binding.root, "Saved favourite city", Snackbar.LENGTH_SHORT).show()
         }
 
         binding.bottomNavigationView.apply {
