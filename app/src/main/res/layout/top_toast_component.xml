@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <FrameLayout android:id="@+id/container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/topToast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green_light"
+            android:elevation="1dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            android:minHeight="74dp"
+            android:lineSpacingMultiplier="1.3"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:text="aeaeaef"
+            tools:visibility="visible"/>
+
+    </FrameLayout>
+</merge>
