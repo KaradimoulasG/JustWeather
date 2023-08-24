@@ -6,14 +6,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
-import com.example.justweather.R
-import com.example.justweather.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.core_domain.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
+import com.example.core_domain.R as R2
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpUi() {
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, findNavController(R.id.nav_host))
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, findNavController(R2.id.nav_host))
 
         binding.fab.setOnClickListener {
             viewModel.saveFavouriteCity()
@@ -44,19 +43,19 @@ class MainActivity : AppCompatActivity() {
 
             setOnItemSelectedListener { item ->
                 when (item.title) {
-                    getString(R.string.bottom_nav_option_home) -> {
-                        findNavController(R.id.nav_host).navigate(R.id.homeFragment)
-                        NavigationUI.onNavDestinationSelected(item, findNavController(R.id.nav_host))
+                    getString(R2.string.bottom_nav_option_home) -> {
+                        findNavController(R2.id.nav_host).navigate(R2.id.homeFragment)
+                        NavigationUI.onNavDestinationSelected(item, findNavController(R2.id.nav_host))
                         true
                     }
-                    getString(R.string.bottom_nav_option_search) -> {
-                        findNavController(R.id.nav_host).navigate(R.id.searchFragment)
-                        NavigationUI.onNavDestinationSelected(item, findNavController(R.id.nav_host))
+                    getString(R2.string.bottom_nav_option_search) -> {
+                        findNavController(R2.id.nav_host).navigate(R2.id.searchFragment)
+                        NavigationUI.onNavDestinationSelected(item, findNavController(R2.id.nav_host))
                         true
                     }
-                    getString(R.string.bottom_nav_option_favourites) -> {
-                        findNavController(R.id.nav_host).navigate(R.id.favoritesFragment)
-                        NavigationUI.onNavDestinationSelected(item, findNavController(R.id.nav_host))
+                    getString(R2.string.bottom_nav_option_favourites) -> {
+                        findNavController(R2.id.nav_host).navigate(R2.id.favoritesFragment)
+                        NavigationUI.onNavDestinationSelected(item, findNavController(R2.id.nav_host))
                         true
                     }
                     else -> false
@@ -73,8 +72,8 @@ class MainActivity : AppCompatActivity() {
                     WeatherViewModelEvent.Success -> Timber.i("worked")
                     WeatherViewModelEvent.Fail -> Timber.i("failed")
                     WeatherViewModelEvent.Loading -> Timber.i("error")
-                    WeatherViewModelEvent.SavedFavouriteCity -> Glide.with(this@MainActivity).load(R.drawable.ic_baseline_favorite_24).into(binding.fab)
-                    WeatherViewModelEvent.NotSavedFavouriteCity -> Glide.with(this@MainActivity).load(R.drawable.ic_baseline_favorite_24_white).into(binding.fab)
+                    WeatherViewModelEvent.SavedFavouriteCity -> Glide.with(this@MainActivity).load(R2.drawable.ic_baseline_favorite_24).into(binding.fab)
+                    WeatherViewModelEvent.NotSavedFavouriteCity -> Glide.with(this@MainActivity).load(R2.drawable.ic_baseline_favorite_24_white).into(binding.fab)
                     else -> Timber.i("sonar won't let me keep this empty")
                 }
             }.launchIn(this)

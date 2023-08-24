@@ -1,8 +1,7 @@
 package com.example.justweather.di
 
-import com.example.justweather.common.Constants
-import com.example.justweather.data.OpenWeatherApi
-import com.example.justweather.data.networkResultHandling.NetworkResultCallAdapterFactory
+import com.example.core_domain.domain.data.OpenWeatherApi
+import com.example.core_domain.domain.data.networkResultHandling.NetworkResultCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -27,7 +26,7 @@ val ApiModule = module {
     single {
         Retrofit.Builder()
             .client(get<OkHttpClient>())
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(com.example.core_domain.domain.common.Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
             .build()

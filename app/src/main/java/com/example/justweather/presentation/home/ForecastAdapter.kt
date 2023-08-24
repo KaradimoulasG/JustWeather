@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.justweather.R
-import com.example.justweather.common.extensions.showWeatherIcon
-import com.example.justweather.common.extensions.toDateFormatted
-import com.example.justweather.domain.model.ForecastInfo
+import com.example.core_domain.R
+import com.example.core_domain.domain.common.extensions.showWeatherIcon
+import com.example.core_domain.domain.model.ForecastInfo
+import com.example.core_domain.domain.common.extensions.toDateFormatted
 import kotlin.math.roundToInt
 
 class ForecastAdapter : ListAdapter<ForecastInfo, ForecastAdapter.ForecastViewHolder>(
@@ -24,7 +24,8 @@ class ForecastAdapter : ListAdapter<ForecastInfo, ForecastAdapter.ForecastViewHo
         override fun areContentsTheSame(oldItem: ForecastInfo, newItem: ForecastInfo) = oldItem == newItem
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ForecastViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.forecast_adapter_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ForecastViewHolder(LayoutInflater.from(parent.context).inflate(
+        R.layout.forecast_adapter_item, parent, false))
     override fun onBindViewHolder(holder: ForecastAdapter.ForecastViewHolder, position: Int) = holder.bind(holder, position)
     fun addAll(items: List<ForecastInfo>) = submitList(items)
 
@@ -36,7 +37,8 @@ class ForecastAdapter : ListAdapter<ForecastInfo, ForecastAdapter.ForecastViewHo
         fun bind(holder: ForecastViewHolder, pos: Int) {
             val result = currentList[pos]
             val context = holder.itemView.context
-            val dateTimeFormatted = toDateFormatted(result.timestamp)
+            val dateTimeFormatted =
+                toDateFormatted(result.timestamp)
             val iconToShow = result.weatherDetails[0].icon.showWeatherIcon()
 
             holder.dateTime.text = dateTimeFormatted

@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.justweather.R
-import com.example.justweather.common.extensions.showWeatherIcon
-import com.example.justweather.domain.model.CityInfo
+import com.example.core_domain.R as R2
+import com.example.core_domain.domain.common.extensions.showWeatherIcon
+import com.example.core_domain.domain.model.CityInfo
 
 class FavoritesAdapter(
     private val layoutInflater: LayoutInflater,
@@ -24,13 +25,13 @@ class FavoritesAdapter(
         override fun areContentsTheSame(oldItem: CityInfo, newItem: CityInfo) = oldItem == newItem
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoritesViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.favorites_adapter_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoritesViewHolder(LayoutInflater.from(parent.context).inflate(R2.layout.favorites_adapter_item, parent, false))
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) = holder.bind(holder, position)
     fun addAll(cities: List<CityInfo>) = submitList(cities)
 
     inner class FavoritesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var weatherIcon: ImageView = itemView.findViewById(R.id.weather_iv)
-        private var cityName: TextView = itemView.findViewById(R.id.city_name_tv)
+        private var weatherIcon: ImageView = itemView.findViewById(R2.id.weather_iv)
+        private var cityName: TextView = itemView.findViewById(R2.id.city_name_tv)
 
         fun bind(holder: FavoritesViewHolder, pos: Int) {
             val result = currentList[pos]

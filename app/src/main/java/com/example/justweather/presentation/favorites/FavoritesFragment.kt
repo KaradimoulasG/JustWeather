@@ -7,13 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
-import com.example.justweather.R
-import com.example.justweather.common.extensions.hide
-import com.example.justweather.common.extensions.show
-import com.example.justweather.common.extensions.whenNotNullNorEmpty
-import com.example.justweather.common.extensions.withNullOrEmpty
-import com.example.justweather.databinding.FragmentFavoritesBinding
-import com.example.justweather.domain.model.CityInfo
+import com.example.core_domain.databinding.FragmentFavoritesBinding
+import com.example.core_domain.domain.common.extensions.hide
+import com.example.core_domain.domain.common.extensions.show
+import com.example.core_domain.domain.common.extensions.whenNotNullNorEmpty
+import com.example.core_domain.domain.common.extensions.withNullOrEmpty
 import com.example.justweather.presentation.BindingFragment
 import com.example.justweather.presentation.WeatherViewModel
 import com.example.justweather.presentation.WeatherViewModelEvent
@@ -22,6 +20,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.example.core_domain.R as R2
 
 class FavoritesFragment : BindingFragment<FragmentFavoritesBinding>() {
 
@@ -57,14 +56,14 @@ class FavoritesFragment : BindingFragment<FragmentFavoritesBinding>() {
                 when (it.eventName) {
                     WeatherViewModelEvent.None -> {}
                     WeatherViewModelEvent.SavedCities -> populateViews(viewModel.state.value.savedCitiesList)
-                    WeatherViewModelEvent.GotCity -> findNavController().navigate(R.id.action_favoritesFragment_to_homeFragment)
+                    WeatherViewModelEvent.GotCity -> findNavController().navigate(R2.id.action_favoritesFragment_to_homeFragment)
                     else -> {}
                 }
             }.launchIn(this)
         }
     }
 
-    private fun populateViews(savedCitiesList: List<CityInfo>) {
+    private fun populateViews(savedCitiesList: List<com.example.core_domain.domain.model.CityInfo>) {
         savedCitiesList.withNullOrEmpty { binding.emptyScreenTv.show() }
 
         savedCitiesList.whenNotNullNorEmpty {

@@ -8,15 +8,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
+import com.example.core_domain.databinding.FragmentHomeBinding
+import com.example.core_domain.domain.common.delegates.ITopToast
+import com.example.core_domain.domain.common.delegates.TopToastDelegate
+import com.example.core_domain.domain.common.extensions.hide
+import com.example.core_domain.domain.common.extensions.show
+import com.example.core_domain.domain.common.extensions.showWeatherIcon
+import com.example.core_domain.domain.common.extensions.toDate
 import com.example.justweather.R
-import com.example.justweather.common.delegates.ITopToast
-import com.example.justweather.common.delegates.TopToastDelegate
-import com.example.justweather.common.extensions.hide
-import com.example.justweather.common.extensions.show
-import com.example.justweather.common.extensions.showWeatherIcon
-import com.example.justweather.common.extensions.toDate
-import com.example.justweather.databinding.FragmentHomeBinding
-import com.example.justweather.domain.model.CityInfo
+import com.example.core_domain.R as R2
 import com.example.justweather.presentation.BindingFragment
 import com.example.justweather.presentation.WeatherState
 import com.example.justweather.presentation.WeatherViewModel
@@ -87,7 +87,7 @@ class HomeFragment :
         }
     }
 
-    private fun populateMainViews(cityInfo: CityInfo?, offlineMode: Boolean = false) {
+    private fun populateMainViews(cityInfo: com.example.core_domain.domain.model.CityInfo?, offlineMode: Boolean = false) {
         val iconToShow = cityInfo?.weatherDetails?.get(0)?.icon?.showWeatherIcon()
         val date = when (cityInfo) {
             viewModel.state.value.apiResponse -> viewModel.state.value.dateTime!!.toDate()
@@ -101,17 +101,17 @@ class HomeFragment :
                 cityInfo?.mainDetails?.pressure!!,
             )
 
-            cityNameTv.text = getString(R.string.city_name_title, cityInfo?.cityName)
-            dateTimeTv.text = getString(R.string.date_time_title, date)
+            cityNameTv.text = getString(R2.string.city_name_title, cityInfo?.cityName)
+            dateTimeTv.text = getString(R2.string.date_time_title, date)
             tempTv.text =
-                getString(R.string.local_temp, cityInfo?.mainDetails?.temp?.roundToInt())
-            realFeelTv.text = getString(R.string.real_feel, cityInfo?.mainDetails?.feels_like)
+                getString(R2.string.local_temp, cityInfo?.mainDetails?.temp?.roundToInt())
+            realFeelTv.text = getString(R2.string.real_feel, cityInfo?.mainDetails?.feels_like)
             Glide.with(this@HomeFragment).load(iconToShow).into(weatherIv)
 
             when (offlineMode) {
                 true -> {
                     Toast.makeText(requireActivity(), "something", Toast.LENGTH_SHORT).show()
-                    showTopToast(isError = true, getString(R.string.top_toast_internet_error))
+                    showTopToast(isError = true, getString(R2.string.top_toast_internet_error))
                     fiveDayForecastNsv.hide()
                     airPollutionLayout.hide()
                     offlineModeTv.show()

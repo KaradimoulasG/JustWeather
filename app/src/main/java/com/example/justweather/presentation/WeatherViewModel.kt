@@ -2,22 +2,20 @@ package com.example.justweather.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.justweather.common.extensions.onError
-import com.example.justweather.common.extensions.onException
-import com.example.justweather.common.extensions.onSuccess
-import com.example.justweather.data.dto.airPollution.AirPollutionDetailsDto
-import com.example.justweather.data.repositories.ICityRepo
-import com.example.justweather.domain.model.CityInfo
-import com.example.justweather.domain.model.ForecastInfo
-import com.example.justweather.domain.model.toAirPollution
-import com.example.justweather.domain.model.toCityInfo
-import com.example.justweather.domain.model.toForecast
-import com.example.justweather.domain.model.toForecastInfo
-import com.example.justweather.domain.useCases.GetForecastUseCase
+import com.example.core_domain.domain.common.extensions.onError
+import com.example.core_domain.domain.common.extensions.onException
+import com.example.core_domain.domain.common.extensions.onSuccess
+import com.example.core_domain.domain.data.repositories.ICityRepo
+import com.example.core_domain.domain.model.toAirPollution
+import com.example.core_domain.domain.model.toCityInfo
+import com.example.core_domain.domain.model.toForecast
+import com.example.core_domain.domain.model.toForecastInfo
+import com.example.core_domain.domain.useCases.GetForecastUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+
 
 class WeatherViewModel(
     private val cityRepo: ICityRepo,
@@ -176,9 +174,9 @@ class WeatherViewModel(
 
 data class WeatherState(
     val eventName: WeatherViewModelEvent = WeatherViewModelEvent.None,
-    val apiResponse: CityInfo? = null,
+    val apiResponse: com.example.core_domain.domain.model.CityInfo? = null,
     val savedCity: Boolean = false,
-    val cachedCity: CityInfo? = null,
+    val cachedCity: com.example.core_domain.domain.model.CityInfo? = null,
     val cachedCityName: String = "",
     val cityName: String = "",
     val searchedCity: String = "",
@@ -189,10 +187,10 @@ data class WeatherState(
     val windSpeed: Double? = 0.0,
     val humidity: Int? = 0,
     val pressure: Int? = 0,
-    val forecastList: List<ForecastInfo> = listOf(),
-    val airPollutionDetails: List<AirPollutionDetailsDto> = listOf(),
+    val forecastList: List<com.example.core_domain.domain.model.ForecastInfo> = listOf(),
+    val airPollutionDetails: List<com.example.core_domain.domain.data.dto.airPollution.AirPollutionDetailsDto> = listOf(),
     val message: String = "",
-    val savedCitiesList: List<CityInfo> = listOf(),
+    val savedCitiesList: List<com.example.core_domain.domain.model.CityInfo> = listOf(),
     val errorCode: Int = 0,
     val errorMessage: String? = "",
     val cameFromSavedCities: Boolean = false,

@@ -1,7 +1,7 @@
 package com.example.justweather.di
 
 import androidx.room.Room
-import com.example.justweather.data.persistence.AppDatabase
+import com.example.core_domain.domain.data.persistence.AppDatabase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

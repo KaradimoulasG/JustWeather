@@ -6,9 +6,8 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.example.justweather.R
-import com.example.justweather.common.extensions.hide
-import com.example.justweather.databinding.FragmentSearchBinding
+import com.example.core_domain.databinding.FragmentSearchBinding
+import com.example.core_domain.domain.common.extensions.hide
 import com.example.justweather.presentation.BindingFragment
 import com.example.justweather.presentation.WeatherViewModel
 import com.example.justweather.presentation.WeatherViewModelEvent
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.example.core_domain.R as R2
 
 class SearchFragment : BindingFragment<FragmentSearchBinding>() {
 
@@ -47,7 +47,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>() {
                 when (it.eventName) {
                     WeatherViewModelEvent.Loading -> timber.log.Timber.i("Loading")
                     WeatherViewModelEvent.Fail -> timber.log.Timber.i("Error")
-                    WeatherViewModelEvent.GotSearchedCity -> findNavController().navigate(R.id.action_searchFragment_to_homeFragment)
+                    WeatherViewModelEvent.GotSearchedCity -> findNavController().navigate(R2.id.action_searchFragment_to_homeFragment)
                     else -> {}
                 }
             }.launchIn(this)
