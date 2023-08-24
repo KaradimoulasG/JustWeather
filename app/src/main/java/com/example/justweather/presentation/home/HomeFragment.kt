@@ -9,6 +9,8 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.justweather.R
 import com.example.justweather.common.components.SlideAnimationDemo
+import com.example.justweather.common.delegates.ITopToast
+import com.example.justweather.common.delegates.TopToastDelegate
 import com.example.justweather.common.extensions.hide
 import com.example.justweather.common.extensions.show
 import com.example.justweather.common.extensions.showWeatherIcon
@@ -26,7 +28,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import kotlin.math.roundToInt
 
-class HomeFragment : BindingFragment<FragmentHomeBinding>() {
+class HomeFragment :
+    BindingFragment<FragmentHomeBinding>(),
+    ITopToast by TopToastDelegate() {
 
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentHomeBinding::inflate
@@ -65,6 +69,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
 
     private fun setUpUi() {
         binding.apply {
+            registerTopToastDelegate(requireActivity().applicationContext, root)
+
             forecastRv.apply {
                 layoutManager = LinearLayoutManager(
                     activity?.applicationContext,
@@ -78,15 +84,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
                 isRefreshing = false
                 setOnRefreshListener { viewModel.getCityInfo("Thessaloniki") }
             }
-
-//            topToast.apply {
-//                setContent {
-//                    SlideAnimationDemo {
-//                        parentLayout.show()
-//                        topToast.hide()
-//                    }
-//                }
-//            }
         }
     }
 
@@ -115,11 +112,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>() {
 
             when (offlineMode) {
                 true -> {
+                    showTopToast(isError = true, "No internet connection")
                     fiveDayForecastNsv.hide()
                     airPollutionLayout.hide()
                     offlineModeTv.show()
                 }
                 else -> {
+                    showTopToast(isError = false, "Got city")
                     fiveDayForecastNsv.show()
                     airPollutionLayout.show()
                     offlineModeTv.hide()
