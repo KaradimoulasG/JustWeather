@@ -9,27 +9,22 @@
     android:background="@color/black"
     tools:context=".presentation.home.HomeFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        android:fillViewport="true">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/weather_refresher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/weather_refresher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:fillViewport="true">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <androidx.compose.ui.platform.ComposeView
-                    android:id="@+id/top_toast"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:id="@+id/main_layout"
@@ -134,11 +129,11 @@
                     android:id="@+id/offline_mode_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
                     android:text="@string/offline_mode_message"
-                    android:textSize="24sp"
-                    android:visibility="gone"
                     android:textColor="@color/white"
-                    android:layout_margin="12dp" />
+                    android:textSize="24sp"
+                    android:visibility="gone" />
 
                 <androidx.core.widget.NestedScrollView
                     android:id="@+id/five_day_forecast_nsv"
@@ -254,6 +249,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

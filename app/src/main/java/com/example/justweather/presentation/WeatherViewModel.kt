@@ -68,11 +68,8 @@ class WeatherViewModel(
                     )
                 }
                 getForecast(model.coordination.lat, model.coordination.lon)
-            }.onException {
-                handleOfflineMode()
-            }.onError { _, _ ->
-                handleOfflineMode()
-            }
+            }.onException { handleOfflineMode() }
+                .onError { _, _ -> handleOfflineMode() }
         }
     }
 
@@ -170,6 +167,10 @@ class WeatherViewModel(
                 )
             }
         }
+    }
+
+    private fun whichCityToShow() {
+
     }
 }
 

@@ -11,6 +11,9 @@ interface CityDao {
     @Upsert
     suspend fun insertFavouriteCity(city: CityInfo)
 
+    @Upsert
+    suspend fun savedTemporaryCity(city: CityInfo)
+
     @Query("SELECT * FROM CityInfo WHERE NULLIF(cityName, '') is NULL ORDER BY timestamp DESC LIMIT 1")
     suspend fun getFavouriteCity(): CityInfo
 

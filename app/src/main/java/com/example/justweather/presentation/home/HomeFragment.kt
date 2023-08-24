@@ -3,12 +3,12 @@ package com.example.justweather.presentation.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.justweather.R
-import com.example.justweather.common.components.SlideAnimationDemo
 import com.example.justweather.common.delegates.ITopToast
 import com.example.justweather.common.delegates.TopToastDelegate
 import com.example.justweather.common.extensions.hide
@@ -48,7 +48,7 @@ class HomeFragment :
         lifecycleScope.launch {
             viewModel.state.onEach {
                 when (it.eventName) {
-                    WeatherViewModelEvent.None -> viewModel.getCityInfo(city = "Athens")
+                    WeatherViewModelEvent.None -> {}
                     WeatherViewModelEvent.Loading -> Timber.i("we wait")
                     WeatherViewModelEvent.GotCity,
                     WeatherViewModelEvent.GotSearchedCity,
@@ -69,7 +69,7 @@ class HomeFragment :
 
     private fun setUpUi() {
         binding.apply {
-            registerTopToastDelegate(requireActivity().applicationContext, root)
+            registerTopToastDelegate(requireActivity(), root)
 
             forecastRv.apply {
                 layoutManager = LinearLayoutManager(
@@ -101,8 +101,6 @@ class HomeFragment :
                 cityInfo?.mainDetails?.pressure!!,
             )
 
-//            topToast.show()
-
             cityNameTv.text = getString(R.string.city_name_title, cityInfo?.cityName)
             dateTimeTv.text = getString(R.string.date_time_title, date)
             tempTv.text =
@@ -112,13 +110,13 @@ class HomeFragment :
 
             when (offlineMode) {
                 true -> {
-                    showTopToast(isError = true, "No internet connection")
+                    Toast.makeText(requireActivity(), "something", Toast.LENGTH_SHORT).show()
+                    showTopToast(isError = true, getString(R.string.top_toast_internet_error))
                     fiveDayForecastNsv.hide()
                     airPollutionLayout.hide()
                     offlineModeTv.show()
                 }
                 else -> {
-                    showTopToast(isError = false, "Got city")
                     fiveDayForecastNsv.show()
                     airPollutionLayout.show()
                     offlineModeTv.hide()

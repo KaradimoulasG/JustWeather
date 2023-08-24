@@ -11,4 +11,5 @@
     <string name="offline_mode_message">Content unavailable in offline mode</string>
     <string name="favorite_cities_title">Favorite Cities</string>
     <string name="empty_favorite_cities">No cities saved yet. Try to search for some and press the heart icon to add them here</string>
+    <string name="top_toast_internet_error">Something went wrong. Please try again later</string>
 </resources>
