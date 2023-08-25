@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 import timber.log.Timber
 import com.example.core_domain.R as R2
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        loadKoinModules(CityModule)
         setContentView(binding.root)
         setUpViewModel()
     }
@@ -78,5 +81,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }.launchIn(this)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unloadKoinModules(CityModule)
     }
 }

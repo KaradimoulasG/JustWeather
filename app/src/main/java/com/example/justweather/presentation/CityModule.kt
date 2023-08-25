@@ -1,4 +1,4 @@
-package com.example.justweather.di
+package com.example.justweather.presentation
 
 import com.example.core_domain.domain.data.repositories.ICityRepo
 import com.example.justweather.presentation.WeatherViewModel

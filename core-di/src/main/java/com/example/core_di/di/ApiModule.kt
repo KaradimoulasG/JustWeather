@@ -1,4 +1,4 @@
-package com.example.justweather.di
+package com.example.core_di.di
 
 import com.example.core_domain.domain.data.OpenWeatherApi
 import com.example.core_domain.domain.data.networkResultHandling.NetworkResultCallAdapterFactory

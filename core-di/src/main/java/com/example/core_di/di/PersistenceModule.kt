@@ -1,4 +1,4 @@
-package com.example.justweather.di
+package com.example.core_di.di
 
 import androidx.room.Room
 import com.example.core_domain.domain.data.persistence.AppDatabase
