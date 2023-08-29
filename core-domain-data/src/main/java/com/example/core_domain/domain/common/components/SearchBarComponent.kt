@@ -21,16 +21,6 @@ class SearchBarComponent @JvmOverloads constructor(
     private val binding = SearchBarComponentBinding.inflate(LayoutInflater.from(context), this)
     private var searchModeToChangeIcons: Boolean = true
 
-//    fun cancelSearch(action: () -> Unit) {
-//        binding.apply {
-//            cancelSearch.setOnClickListener {
-//                searchEt.text.clear()
-//                searchModeToChangeIcons = false
-//                hideIcons()
-//                action()
-//            }
-//        }
-//    }
 
     fun search(action: () -> Unit) {
         binding.searchBtn.setOnClickListener {
