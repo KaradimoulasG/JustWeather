@@ -34,7 +34,7 @@ class WeatherViewModel(
             val cachedCity = cityRepo.getFavouriteCity()
             _state.update { state ->
                 state.copy(
-                    eventName = WeatherViewModelEvent.Loading,
+                    eventName = if (cachedCity == null) WeatherViewModelEvent.NoCachedCity else WeatherViewModelEvent.Loading,
                     cachedCityName = if (cachedCity == null) "" else cachedCity.cityName,
                 )
             }
@@ -208,6 +208,7 @@ sealed class WeatherViewModelEvent() {
     object SavedFavouriteCity : WeatherViewModelEvent()
     object NotSavedFavouriteCity : WeatherViewModelEvent()
     object SavedCities : WeatherViewModelEvent()
+    object NoCachedCity : WeatherViewModelEvent()
     object CachedCity : WeatherViewModelEvent()
     object GotCity : WeatherViewModelEvent()
     object GotForecast : WeatherViewModelEvent()

@@ -21,7 +21,6 @@ class WeatherApplication : Application() {
             modules(
                 PersistenceModule,
                 ApiModule,
-//                CityModule,
             )
         }
     }
