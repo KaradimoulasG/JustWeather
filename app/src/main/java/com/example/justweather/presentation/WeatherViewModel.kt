@@ -51,9 +51,9 @@ class WeatherViewModel(
                 val model = apiResponse.toCityInfo()
                 _state.update { state ->
                     state.copy(
-                        eventName = if (cityRepo.checkIfCityIsSaved(model.cityName)) WeatherViewModelEvent.SavedFavouriteCity else WeatherViewModelEvent.NotSavedFavouriteCity,
+                        eventName = if (cityRepo.isCityIsSaved(model.cityName)) WeatherViewModelEvent.SavedFavouriteCity else WeatherViewModelEvent.NotSavedFavouriteCity,
                         apiResponse = model,
-                        savedCity = cityRepo.checkIfCityIsSaved(model.cityName),
+                        savedCity = cityRepo.isCityIsSaved(model.cityName),
                         cachedCity = model,
                         cityName = city,
                         dateTime = model.timestamp,
