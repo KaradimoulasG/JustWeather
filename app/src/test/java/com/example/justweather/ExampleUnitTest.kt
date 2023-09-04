@@ -9,13 +9,12 @@ import com.example.core_domain.domain.data.dto.cityInfo.WeatherDto
 import com.example.core_domain.domain.data.dto.cityInfo.WindDto
 import com.example.core_domain.domain.data.persistence.CityDao
 import com.example.core_domain.domain.repoImpl.CityRepoImpl
-import com.squareup.moshi.Json
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -31,7 +30,7 @@ class ExampleUnitTest {
     private var weatherService: CityRepoImpl? = null
     private val weatherApi: OpenWeatherApi? = null
     private val cityDao: CityDao? = null
-    val mockResponse = WeatherResponse(null, null, null, null, null, null, null, "Thessaloniki",)
+    val mockResponse = WeatherResponse(null, null, null, null, null, null, null, "Thessaloniki")
 
     @Before
     fun setUp() {
@@ -40,23 +39,27 @@ class ExampleUnitTest {
     }
 
     @Test
-    suspend fun testGetWeatherForCity_Success() {
-        // Mock the behavior of the WeatherApi when fetching weather for "Thessaloniki"
-        `when`(weatherApi?.getCityInfo("Thessaloniki")).thenReturn(null)
-        val result = weatherService?.getCityInfo("Thessaloniki")
+    fun testGetWeatherForCity_Success() {
+        runBlocking {
+            // Mock the behavior of the WeatherApi when fetching weather for "Thessaloniki"
+            `when`(weatherApi?.getCityInfo("Thessaloniki")).thenReturn(null)
+            val result = weatherService?.getCityInfo("Thessaloniki")
 
-        // Verify that the result matches the expected value
-        assertEquals(null, result)
+            // Verify that the result matches the expected value
+            assertEquals(null, result)
+        }
     }
 
     @Test
-    suspend fun testGetWeatherForCity_Error() {
-        // Mock the behavior of the WeatherApi when encountering an error
-        `when`(weatherApi?.getCityInfo("Invalid City")).thenThrow(RuntimeException("API Error"))
-        val result = weatherService?.getCityInfo("Invalid City")
+    fun testGetWeatherForCity_Error() {
+        runBlocking {
+            // Mock the behavior of the WeatherApi when encountering an error
+            `when`(weatherApi?.getCityInfo("Invalid City")).thenThrow(RuntimeException("API Error"))
+            val result = weatherService?.getCityInfo("Invalid City")
 
-        // Verify that the result indicates an error
-        assertEquals("Error: Unable to fetch weather data", result)
+            // Verify that the result indicates an error
+            assertEquals("Error: Unable to fetch weather data", result)
+        }
     }
 }
 
