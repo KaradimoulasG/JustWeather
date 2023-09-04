@@ -44,7 +44,6 @@ class ExampleUnitTest {
             // Mock the behavior of the WeatherApi when fetching weather for "Thessaloniki"
             `when`(weatherApi?.getCityInfo("Thessaloniki")).thenReturn(null)
             val result = weatherService?.getCityInfo("Thessaloniki")
-
             // Verify that the result matches the expected value
             assertEquals(null, result)
         }
